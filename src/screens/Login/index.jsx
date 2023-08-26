@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { View } from "react-native"
+import { View, Image, Text } from "react-native"
 import { useNavigation } from "@react-navigation/native"
 import LoginStyle from "./style"
 import { Button, TextInput } from "../../components"
@@ -9,10 +9,12 @@ const Login = () => {
   const [password, onChangePassword] = useState('')
   const navigation = useNavigation();
 
-  const { loginWrapper, viewScreen } = LoginStyle
+  const { loginWrapper, viewScreen, logoStyle, brandName } = LoginStyle
 
   return (
     <View style={viewScreen}>
+      <Image style={logoStyle} source={require("../../assets/logo.png")} />
+      <Text style={brandName}>ClassOn</Text>
       <View style={loginWrapper}>
         <TextInput
           onChangeText={onChangeUsername}
