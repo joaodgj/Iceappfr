@@ -3,25 +3,18 @@ import { StyleSheet } from "react-native"
 
 const LoginStyle = StyleSheet.create({
         viewScreen: {
-                backgroundColor: colors.gray04,
+                backgroundColor: colors.main,
                 flex: 1,
                 justifyContent: 'center',
                 alignItems: 'center'
         },
-        usernameStyle: {
-                textAlign: "center"
-        },
-        passwordStyle: {
-                textAlign: "center"
-        },
         loginWrapper: {
-                marginHorizontal: 40,
+                borderRadius: 10,
                 padding: 20,
-                backgroundColor: colors.gray03,
-                maxWidth: 500,
+                backgroundColor: colors.gray00,
                 flexDirection: 'column',
                 justifyContent: 'center',
-                alignItems: 'center',
+                alignItems: 'center'
         }
       });
 
