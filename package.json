@@ -15,6 +15,7 @@
     "@react-navigation/native-stack": "^6.9.13",
     "expo": "48.0.17",
     "expo-status-bar": "~1.4.4",
+    "metro": "^0.79.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-native": "0.71.8",
@@ -26,8 +27,6 @@
     "@babel/core": "^7.20.0"
   },
   "overrides": {
-    "metro": "0.76.0",
-    "metro-resolver": "0.76.0",
     "react-refresh": "~0.14.0"
   },
   "private": true
