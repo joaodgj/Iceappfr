@@ -1,35 +1,37 @@
 import { useState } from "react";
-import { View, Button, TextInput } from "react-native"
+import { View, Image, Text } from "react-native"
 import { useNavigation } from "@react-navigation/native"
 import LoginStyle from "./style"
+import { Button, TextInput } from "../../components"
 
 const Login = () => {
   const [username, onChangeUsername] = useState('')
   const [password, onChangePassword] = useState('')
   const navigation = useNavigation();
 
-  const { usernameStyle, passwordStyle, loginWrapper, viewScreen } = LoginStyle
+  const { loginWrapper, viewScreen, logoStyle, brandName } = LoginStyle
 
   return (
     <View style={viewScreen}>
-        <View style={loginWrapper}>
+      <Image style={logoStyle} source={require("../../assets/logo.png")} />
+      <Text style={brandName}>ClassOn</Text>
+      <View style={loginWrapper}>
         <TextInput
-        style={usernameStyle}
-        onChangeText={onChangeUsername}
-        value={username}
-        placeholder="Endereço de e-mail"
-      />
-      <TextInput
-        style={passwordStyle}
-        onChangeText={onChangePassword}
-        value={password}
-        placeholder="Senha"
-      />
-            <Button
-        title="Entrar"
-        onPress={() => navigation.navigate("Loading")}
-      />
-        </View>
+          onChangeText={onChangeUsername}
+          value={username}
+          placeholder="Endereço de e-mail"
+        />
+        <TextInput
+          onChangeText={onChangePassword}
+          value={password}
+          placeholder="Senha"
+          secureTextEntry={true}
+        />
+        <Button
+          title="Entrar"
+          onPress={() => navigation.navigate("Loading")}
+        />
+      </View>
     </View>
   );
 };
