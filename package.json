@@ -7,7 +7,8 @@
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web",
-    "ts:check": "tsc"
+    "ts:check": "tsc",
+    "prod": "npx expo export --platform web && npx serve dist"
   },
   "dependencies": {
     "@expo/webpack-config": "^18.0.1",
@@ -23,6 +24,9 @@
   },
   "devDependencies": {
     "@babel/core": "^7.20.0"
+  },
+  "overrides": {
+    "react-refresh": "~0.14.0"
   },
   "private": true
 }
