@@ -1,7 +1,10 @@
+import { registerRootComponent } from 'expo';
 import React from 'react';
 
 import Route from './src/routes';
 
-export default function App() {
+function App() {
   return <Route />
 }
+
+registerRootComponent(App);
