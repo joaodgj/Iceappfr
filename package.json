@@ -8,7 +8,7 @@
     "ios": "expo start --ios",
     "web": "expo start --web",
     "ts:check": "tsc",
-    "prod": "npm install && npx expo export --platform web && npx serve dist --single"
+    "prod": "npm install --force && npx expo export --platform web && npx serve dist --single"
   },
   "dependencies": {
     "@expo/webpack-config": "^19.0.0",
