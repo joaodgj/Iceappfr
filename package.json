@@ -29,6 +29,7 @@
   },
   "overrides": {
     "react-refresh": "~0.14.0",
+    "metro": "0.76.4",
     "metro-resolver": "0.76.4"
   },
   "private": true
