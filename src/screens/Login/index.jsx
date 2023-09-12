@@ -29,7 +29,7 @@ const Login = () => {
         />
         <Button
           title="Entrar"
-          onPress={() => navigation.navigate("Loading")}
+          onPress={() => navigation.navigate("Feed")}
         />
       </View>
     </View>
