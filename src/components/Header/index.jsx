@@ -1,12 +1,13 @@
 import { View, Image } from "react-native"
 import HeaderStyle from "./style"
 
-const Header = () => {
-    const { headerWrapper, logoStyle } = HeaderStyle
+const Header = (props) => {
+    const { headerWrapper } = HeaderStyle
+    const { children } = props
 
     return (
         <View style={headerWrapper}>
-            <Image style={logoStyle} source={require("../../assets/logo.png")} />
+            {children}
         </View>
     )
 };
