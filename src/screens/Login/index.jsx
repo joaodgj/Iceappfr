@@ -3,6 +3,7 @@ import { View, Image, Text } from "react-native"
 import { useNavigation } from "@react-navigation/native"
 import LoginStyle from "./style"
 import { Button, TextInput } from "../../components"
+import { login } from "../../services";
 
 const Login = () => {
   const [username, onChangeUsername] = useState('')
@@ -10,6 +11,20 @@ const Login = () => {
   const navigation = useNavigation();
 
   const { loginWrapper, viewScreen, logoStyle, brandName } = LoginStyle
+
+  const handleLogin = async () => {
+    try {
+
+      const loginData = await login(username, password);
+
+      console.log('Dados de login:', loginData);
+
+      navigation.navigate("Feed");
+    } catch (error) {
+      console.error('Erro ao fazer login:', error);
+
+    }
+  };
 
   return (
     <View style={viewScreen}>
@@ -19,7 +34,7 @@ const Login = () => {
         <TextInput
           onChangeText={onChangeUsername}
           value={username}
-          placeholder="Endereço de e-mail"
+          placeholder="Nome de usuário"
         />
         <TextInput
           onChangeText={onChangePassword}
@@ -29,7 +44,7 @@ const Login = () => {
         />
         <Button
           title="Entrar"
-          onPress={() => navigation.navigate("Feed")}
+          onPress={handleLogin}
         />
       </View>
     </View>
