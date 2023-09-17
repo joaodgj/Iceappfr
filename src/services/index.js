@@ -1,7 +1,7 @@
 import { mockProfilePicture } from '../mock'
 import axios from 'axios';
 
-const API_BASE_URL = 'http://18.228.23.193:3333'; 
+const API_BASE_URL = 'http://54.233.79.141:3333'; 
 
 const login = async (username, password) => {
   try {
