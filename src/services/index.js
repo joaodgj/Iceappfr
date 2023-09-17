@@ -1,29 +1,29 @@
-import { mockProfilePicture } from '../mock'
-import axios from 'axios';
+import { mockLoginData, mockProfilePicture } from "../mock";
+import apiClient from "./api";
 
-const API_BASE_URL = 'http://54.233.79.141:3333'; 
+const USE_MOCK = true;
 
-const login = async (username, password) => {
-  try {
-    const response = await axios.post(`${API_BASE_URL}/login`, {
+const apiLogin = (username, password) => {
+  apiClient
+    .post(`${API_BASE_URL}/login`, {
       username,
       password,
+    })
+    .then((response) => {
+      return response.data;
+    })
+    .catch((err) => {
+      console.error("ops! ocorreu um erro" + err);
+      alert("Não foi possível realizar o login");
     });
-
-    return response.data; 
-  } catch (error) {
-    throw error; 
-  }
 };
 
-const useMock = true
-
-// const login = () => {
-//     return useMock ? mockLoginData() : null
-// }
+const login = async (username, password) => {
+  return USE_MOCK ? mockLoginData() : apiLogin(username, password);
+};
 
 const getProfilePicture = () => {
-    return useMock ? mockProfilePicture() : null
-}
+  return USE_MOCK ? mockProfilePicture() : null;
+};
 
-export { login, getProfilePicture }
+export { login, getProfilePicture };
