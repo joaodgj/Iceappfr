@@ -5,21 +5,23 @@ import LoginStyle from "./style"
 import { Button, TextInput } from "../../components"
 import { login } from "../../services";
 import { AuthContext } from "../../contexts/auth"
+import apiClient from "../../services/api";
+import jwt_decode from "jwt-decode";
 
 const Login = () => {
   const [username, onChangeUsername] = useState('')
   const [password, onChangePassword] = useState('')
   const navigation = useNavigation();
-  const { auth, setAuth} = useContext(AuthContext);
+  const { auth, setAuth } = useContext(AuthContext);
 
   const { loginWrapper, viewScreen, logoStyle, brandName } = LoginStyle
 
-  const handleLogin = () => {
-    console.log('Dados do context: \n', auth);
+  const handleLogin = async () => {
     login(username, password).then(response => {
-      setAuth({response: response, testing: 'this'})
-      console.log('Dados de tentativa de login: \n', response);
-      if (response.status === '200') {
+      console.log({ token: response.data.token, ...jwt_decode(response.data.token) })
+      setAuth({ token: response.data.token, ...jwt_decode(response.data.token) })
+      if (response.status === 200) {
+        apiClient.defaults.headers.Authorization = `Baerer ${response.data.token}`;
         navigation.navigate("Feed");
       }
     });

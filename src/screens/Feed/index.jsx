@@ -10,7 +10,6 @@ const Feed = () => {
     const [profilePicture, setProfilePicture] = useState()
 
     useEffect(() => {
-        setUserData(login)
         setProfilePicture(getProfilePicture)
     }, [])
 

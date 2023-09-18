@@ -1,25 +1,27 @@
 import { mockLoginData, mockProfilePicture } from "../mock";
 import apiClient from "./api";
 
-const USE_MOCK = true;
+const USE_MOCK = false;
+const API_BASE_URL = "http://54.233.79.141:3333";
 
-const apiLogin = (username, password) => {
-  apiClient
+const apiLogin = async (username, password) => {
+  const response = await apiClient
     .post(`${API_BASE_URL}/login`, {
       username,
       password,
     })
-    .then((response) => {
-      return response.data;
-    })
     .catch((err) => {
-      console.error("ops! ocorreu um erro" + err);
+      console.error("ops! ocorreu um erro: " + err);
       alert("Não foi possível realizar o login");
     });
+  return response;
 };
 
 const login = async (username, password) => {
-  return USE_MOCK ? mockLoginData() : apiLogin(username, password);
+  const returnData = USE_MOCK
+    ? mockLoginData()
+    : await apiLogin(username, password);
+  return returnData;
 };
 
 const getProfilePicture = () => {
