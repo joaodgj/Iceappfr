@@ -14,7 +14,7 @@ const HeaderStyle = StyleSheet.create({
     paddingVertical: 8,
     justifyContent: "space-between",
     alignItems: "center",
-    flexDirection: "row",
+    flexDirection: "row"
   },
 });
 

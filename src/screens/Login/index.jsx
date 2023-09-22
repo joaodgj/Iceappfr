@@ -3,7 +3,7 @@ import { View, Image, Text } from "react-native"
 import { useNavigation } from "@react-navigation/native"
 import LoginStyle from "./style"
 import { Button, TextInput } from "../../components"
-import { login } from "../../services";
+import { getProfilePicture, login } from "../../services";
 import { AuthContext } from "../../contexts/auth"
 import apiClient from "../../services/api";
 import jwt_decode from "jwt-decode";
@@ -12,14 +12,13 @@ const Login = () => {
   const [username, onChangeUsername] = useState('')
   const [password, onChangePassword] = useState('')
   const navigation = useNavigation();
-  const { auth, setAuth } = useContext(AuthContext);
+  const { setAuth } = useContext(AuthContext);
 
   const { loginWrapper, viewScreen, logoStyle, brandName } = LoginStyle
 
   const handleLogin = async () => {
     login(username, password).then(response => {
-      console.log({ token: response.data.token, ...jwt_decode(response.data.token) })
-      setAuth({ token: response.data.token, ...jwt_decode(response.data.token) })
+      setAuth({ token: response.data.token, ...jwt_decode(response.data.token), profilePicture: getProfilePicture() })
       if (response.status === 200) {
         apiClient.defaults.headers.Authorization = `Baerer ${response.data.token}`;
         navigation.navigate("Feed");

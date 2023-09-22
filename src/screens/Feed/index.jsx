@@ -1,16 +1,17 @@
-import React, { useEffect, useState } from 'react'
-import { View, Text, Image } from 'react-native'
-import { Header } from '../../components'
+import React, { useEffect, useState, useContext } from 'react'
+import { View, Image } from 'react-native'
+import { AuthContext } from "../../contexts/auth"
+import { Header, NewPost } from '../../components'
 import FeedStyle from './style'
-import { login, getProfilePicture } from '../../services'
 
 const Feed = () => {
-    const { feedWrapper, logoStyle, profilePictureStyle } = FeedStyle
-    const [userData, setUserData] = useState({})
+    const { feedWrapper, logoStyle, profilePictureStyle, contentWrapper } = FeedStyle
     const [profilePicture, setProfilePicture] = useState()
 
+    const { auth } = useContext(AuthContext);
+
     useEffect(() => {
-        setProfilePicture(getProfilePicture)
+        setProfilePicture(auth.profilePicture)
     }, [])
 
     return (
@@ -19,6 +20,9 @@ const Feed = () => {
                 <Image style={logoStyle} source={require("../../assets/logo.png")} />
                 <Image style={profilePictureStyle} source={{ uri: `data:image/jpg;base64,${profilePicture}` }} />
             </Header>
+            <View style={contentWrapper}>
+            <NewPost/>
+            </View>
         </View>
     )
 }

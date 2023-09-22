@@ -13,6 +13,9 @@ const FeedStyle = StyleSheet.create({
     height: 50,
     borderRadius: 10,
   },
+  contentWrapper: {
+    marginTop: 100
+  }
 });
 
 export default FeedStyle;
