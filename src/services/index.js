@@ -2,7 +2,7 @@ import { mockLoginData, mockProfilePicture } from "../mock";
 import apiClient from "./api";
 
 const USE_MOCK = false;
-const API_BASE_URL = "http://54.233.79.141:3333";
+const API_BASE_URL = "http://54.207.205.122:3333";
 
 const apiLogin = async (username, password) => {
   const response = await apiClient
