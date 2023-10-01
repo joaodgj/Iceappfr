@@ -21,4 +21,4 @@ jobs:
         REMOTE_HOST: ${{secrets.AZURE_HOST}}
         REMOTE_USER: ${{secrets.AZURE_USER}}
         TARGET: ${{secrets.AZURE_TARGET_DIR}}
-        EXCLUDE: "/dist/, /node_modules/, **.env, rebuild_app.sh, watcher.sh"
+        EXCLUDE: "/node_modules/, **.env, rebuild_app.sh, watcher.sh"
