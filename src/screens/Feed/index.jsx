@@ -11,17 +11,17 @@ const Feed = () => {
     const { auth } = useContext(AuthContext);
 
     useEffect(() => {
-        setProfilePicture(auth.profilePicture)
+        setProfilePicture(auth.profile_image_url)
     }, [])
 
     return (
         <View style={feedWrapper}>
             <Header>
                 <Image style={logoStyle} source={require("../../assets/logo.png")} />
-                <Image style={profilePictureStyle} source={{ uri: `data:image/jpg;base64,${profilePicture}` }} />
+                <Image style={profilePictureStyle} source={{ uri: profilePicture }} />
             </Header>
             <View style={contentWrapper}>
-                <NewPost/>
+                <NewPost profilePicture={profilePicture} />
             </View>
         </View>
     )

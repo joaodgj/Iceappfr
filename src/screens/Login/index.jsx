@@ -19,7 +19,7 @@ const Login = () => {
   const handleLogin = async () => {
     login(username, password).then(response => {
       console.log(jwt_decode(response.data.token))
-      setAuth({ token: response.data.token, ...jwt_decode(response.data.token), profilePicture: getProfilePicture() })
+      setAuth({ token: response.data.token, ...jwt_decode(response.data.token) })
       if (response.status === 200) {
         apiClient.defaults.headers.Authorization = `Baerer ${response.data.token}`;
         navigation.navigate("Feed");
