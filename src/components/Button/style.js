@@ -4,7 +4,6 @@ import { colors } from '../../styles'
 const ButtonStyle = StyleSheet.create({
     buttonWrapper: {
         borderRadius: 4,
-        backgroundColor: colors.true,
         paddingHorizontal: 16,
         paddingVertical: 8
     },

@@ -21,7 +21,7 @@ const Feed = () => {
                 <Image style={profilePictureStyle} source={{ uri: `data:image/jpg;base64,${profilePicture}` }} />
             </Header>
             <View style={contentWrapper}>
-            <NewPost/>
+                <NewPost/>
             </View>
         </View>
     )

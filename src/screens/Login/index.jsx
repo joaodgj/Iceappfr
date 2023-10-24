@@ -14,10 +14,11 @@ const Login = () => {
   const navigation = useNavigation();
   const { setAuth } = useContext(AuthContext);
 
-  const { loginWrapper, viewScreen, logoStyle, brandName } = LoginStyle
+  const { loginWrapper, viewScreen, logoStyle, brandName, loginButtonStyle } = LoginStyle
 
   const handleLogin = async () => {
     login(username, password).then(response => {
+      console.log(jwt_decode(response.data.token))
       setAuth({ token: response.data.token, ...jwt_decode(response.data.token), profilePicture: getProfilePicture() })
       if (response.status === 200) {
         apiClient.defaults.headers.Authorization = `Baerer ${response.data.token}`;
@@ -45,6 +46,7 @@ const Login = () => {
         <Button
           title="Entrar"
           onPress={handleLogin}
+          buttonStyle={loginButtonStyle}
         />
       </View>
     </View>

@@ -1,11 +1,14 @@
 import { useContext, useState, useEffect } from "react";
-import { View, Image } from "react-native"
+import { View, Image, TextInput } from "react-native"
 import { AuthContext } from "../../contexts/auth"
 import NewPostStyle from "./style"
 
+import { Button } from "../"
+
 const NewPost = () => {
-    const { newPostWrapper, profilePictureStyle } = NewPostStyle
+    const { newPostWrapper, profilePictureStyle, newPostTextInput, newPostButton, createNewPostWrapper, buttonsWrapper } = NewPostStyle
     const [profilePicture, setProfilePicture] = useState()
+    const [newPostFocused, setNewPostFocused] = useState(false)
 
     const { auth } = useContext(AuthContext);
 
@@ -15,8 +18,19 @@ const NewPost = () => {
 
     return (
         <View style={newPostWrapper}>
-            <Image style={profilePictureStyle} source={{ uri: `data:image/jpg;base64,${profilePicture}` }} />
-            Quais são as novidades, Nina?
+            <View style={createNewPostWrapper}>
+                <Image style={profilePictureStyle} source={{ uri: `data:image/jpg;base64,${profilePicture}` }} />
+                <TextInput
+                    style={newPostTextInput}
+                    editable
+                    placeholder="Quais são as novidades, Nina?"
+                    onFocus={() => setNewPostFocused(true)}
+                    onBlur={() => setNewPostFocused(false)}
+                />
+            </View>
+            <View style={buttonsWrapper}>
+                { newPostFocused ? <Button buttonStyle={newPostButton} title="Send" accessibilityLabel="Create new post" /> : null }
+            </View>
         </View>
     )
 };

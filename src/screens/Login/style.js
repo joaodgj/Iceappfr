@@ -21,14 +21,17 @@ const LoginStyle = StyleSheet.create({
     height: 54
   },
   brandName: {
-        textShadowColor: 'rgba(0, 0, 0, 0.25)',
-        textShadowOffset: {width: 0, height: 4},
-        textShadowRadius: 4,
-        color: colors.gray05,
-        fontSize: 40,
-        textAlign: 'center',
-        paddingBottom: 25
-      }
+    textShadowColor: 'rgba(0, 0, 0, 0.25)',
+    textShadowOffset: {width: 0, height: 4},
+    textShadowRadius: 4,
+    color: colors.gray05,
+    fontSize: 40,
+    textAlign: 'center',
+    paddingBottom: 25
+  },
+  loginButtonStyle: {
+    backgroundColor: colors.true
+  }
 });
 
 export default LoginStyle;

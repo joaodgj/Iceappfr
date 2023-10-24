@@ -14,7 +14,11 @@ const FeedStyle = StyleSheet.create({
     borderRadius: 10,
   },
   contentWrapper: {
-    marginTop: 100
+    marginTop: 100,
+    display: 'flex',
+    flexDirection: 'row',
+    display: 'flex',
+    justifyContent: 'center'
   }
 });
 
