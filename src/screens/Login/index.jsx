@@ -3,7 +3,7 @@ import { View, Image, Text } from "react-native"
 import { useNavigation } from "@react-navigation/native"
 import LoginStyle from "./style"
 import { Button, TextInput } from "../../components"
-import { getProfilePicture, login } from "../../services";
+import { login } from "../../services";
 import { AuthContext } from "../../contexts/auth"
 import apiClient from "../../services/api";
 import jwt_decode from "jwt-decode";
