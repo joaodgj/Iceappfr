@@ -8,12 +8,17 @@ const Feed = () => {
     const { feedWrapper, logoStyle, profilePictureStyle, contentWrapper } = FeedStyle
     const [profilePicture, setProfilePicture] = useState()
     const [userNickname, setUserNickname] = useState()
+    const[userDefaultGroup,setUserDefaultGroup] = useState()
+    const[userId,setUserId] = useState()
 
     const { auth } = useContext(AuthContext);
 
     useEffect(() => {
+        console.log(auth)
         setProfilePicture(auth.profile_image_url)
         setUserNickname(auth.nickname)
+        setUserDefaultGroup(auth.userGroupsIds[0])
+        setUserId(auth.userId)
     }, [])
 
     return (
@@ -23,7 +28,7 @@ const Feed = () => {
                 <Image style={profilePictureStyle} source={{ uri: profilePicture }} />
             </Header>
             <View style={contentWrapper}>
-                <NewPost profilePicture={profilePicture} userNickname={userNickname} />
+                <NewPost profilePicture={profilePicture} userNickname={userNickname} userDefaultGroup={userDefaultGroup} userId={userId} />
             </View>
         </View>
     )
