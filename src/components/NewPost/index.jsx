@@ -6,7 +6,7 @@ import NewPostStyle from "./style"
 import { Button } from "../"
 
 const NewPost = (props) => {
-    const { profilePicture } = props
+    const { profilePicture, userNickname } = props
     const { newPostWrapper, profilePictureStyle, newPostTextInput, newPostButton, createNewPostWrapper, buttonsWrapper } = NewPostStyle
     const [newPostFocused, setNewPostFocused] = useState(false)
 
@@ -17,7 +17,7 @@ const NewPost = (props) => {
                 <TextInput
                     style={newPostTextInput}
                     editable
-                    placeholder="Quais são as novidades, Nina?"
+                    placeholder={`Quais são as novidades, ${userNickname}?`}
                     onFocus={() => setNewPostFocused(true)}
                     onBlur={() => setNewPostFocused(false)}
                 />

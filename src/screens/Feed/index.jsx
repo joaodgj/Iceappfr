@@ -7,11 +7,13 @@ import FeedStyle from './style'
 const Feed = () => {
     const { feedWrapper, logoStyle, profilePictureStyle, contentWrapper } = FeedStyle
     const [profilePicture, setProfilePicture] = useState()
+    const [userNickname, setUserNickname] = useState()
 
     const { auth } = useContext(AuthContext);
 
     useEffect(() => {
         setProfilePicture(auth.profile_image_url)
+        setUserNickname(auth.nickname)
     }, [])
 
     return (
@@ -21,7 +23,7 @@ const Feed = () => {
                 <Image style={profilePictureStyle} source={{ uri: profilePicture }} />
             </Header>
             <View style={contentWrapper}>
-                <NewPost profilePicture={profilePicture} />
+                <NewPost profilePicture={profilePicture} userNickname={userNickname} />
             </View>
         </View>
     )
