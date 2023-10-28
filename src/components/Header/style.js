@@ -3,6 +3,7 @@ import { colors } from "../../styles";
 
 const HeaderStyle = StyleSheet.create({
   headerWrapper: {
+    zIndex: 1,
     paddingHorizontal: 40,
     paddingVertical: 20,
     height: 100,

@@ -6,16 +6,15 @@ import { Button } from "../"
 import { sendNewPost } from "../../services";
 
 const NewPost = (props) => {
-    const { profilePicture, userNickname, userDefaultGroup, userId } = props
+    const { profilePicture, userNickname, userGroupToSendMessage, userId } = props
     const { newPostWrapper, profilePictureStyle, newPostTextInput, newPostButton, createNewPostWrapper, buttonsWrapper } = NewPostStyle
-    const [newPostFocused, setNewPostFocused] = useState(false)
     const [newPostDescription, setNewPostDescription] = useState('');
 
     const createBasicAlert = (title, message) =>
         Alert.alert(title, message, [{ text: 'OK', onPress: () => console.log('OK Pressed') }]);
 
     const sendPostHandler = async () => {
-        sendNewPost(userId, userDefaultGroup, newPostDescription).then(response => {
+        sendNewPost(userId, userGroupToSendMessage.groupId, newPostDescription).then(response => {
             if (response.status === 200) {
                 if (Platform.OS === 'web') {
                     alert('Sua postagem foi realizada com sucesso!!!')
@@ -36,8 +35,6 @@ const NewPost = (props) => {
                     onChangeText={setNewPostDescription}
                     editable
                     placeholder={`Quais são as novidades, ${userNickname}?`}
-                    onFocus={() => setNewPostFocused(true)}
-                    onBlur={() => setNewPostFocused(false)}
                 />
             </View>
             <View style={buttonsWrapper}>

@@ -1,15 +1,18 @@
 import React, { useEffect, useState, useContext } from 'react'
 import { View, Image } from 'react-native'
 import { AuthContext } from "../../contexts/auth"
-import { Header, NewPost } from '../../components'
+import { Header, NewPost, Posts } from '../../components'
+import { getPostsByGroups } from '../../services'
 import FeedStyle from './style'
 
 const Feed = () => {
     const { feedWrapper, logoStyle, profilePictureStyle, contentWrapper } = FeedStyle
     const [profilePicture, setProfilePicture] = useState()
     const [userNickname, setUserNickname] = useState()
-    const[userDefaultGroup,setUserDefaultGroup] = useState()
-    const[userId,setUserId] = useState()
+    const [userGroups,setUserGroups] = useState()
+    const [currentGroup,setCurrentGroup] = useState()
+    const [userId,setUserId] = useState()
+    const [posts, setPosts] = useState()
 
     const { auth } = useContext(AuthContext);
 
@@ -17,9 +20,20 @@ const Feed = () => {
         console.log(auth)
         setProfilePicture(auth.profile_image_url)
         setUserNickname(auth.nickname)
-        setUserDefaultGroup(auth.userGroupsIds[0])
+        setUserGroups(auth.arrayGroups)
+        setCurrentGroup(auth.arrayGroups[0])
         setUserId(auth.userId)
     }, [])
+
+    useEffect(() => {
+        if (currentGroup)
+            getPostsByGroups(currentGroup.groupId).then(response => {
+                if (response.status === 200) {
+                    setPosts(response.data)
+                }
+            })
+    }, [currentGroup])
+    
 
     return (
         <View style={feedWrapper}>
@@ -28,7 +42,8 @@ const Feed = () => {
                 <Image style={profilePictureStyle} source={{ uri: profilePicture }} />
             </Header>
             <View style={contentWrapper}>
-                <NewPost profilePicture={profilePicture} userNickname={userNickname} userDefaultGroup={userDefaultGroup} userId={userId} />
+                <NewPost profilePicture={profilePicture} userNickname={userNickname} userGroupToSendMessage={currentGroup} userId={userId} />
+                <Posts data={posts} />
             </View>
         </View>
     )

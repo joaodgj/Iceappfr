@@ -18,7 +18,8 @@ const FeedStyle = StyleSheet.create({
     display: 'flex',
     flexDirection: 'row',
     display: 'flex',
-    justifyContent: 'center'
+    flexDirection: 'column',
+    alignItems: 'center'
   }
 });
 

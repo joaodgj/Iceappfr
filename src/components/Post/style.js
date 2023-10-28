@@ -1,10 +1,10 @@
 import { StyleSheet } from "react-native";
 import { colors } from '../../styles'
 
-const NewPostStyle = StyleSheet.create({
-  newPostWrapper: {
-    display: 'flex',
-    paddingTop: 25,
+const PostStyle = StyleSheet.create({
+  postWrapper: {
+    flex: 1,
+    paddingVertical: 25,
     alignItems: 'center'
   },
   profilePictureStyle: {
@@ -12,7 +12,7 @@ const NewPostStyle = StyleSheet.create({
     height: 40,
     borderRadius: 20,
   },
-  newPostTextInput: {
+  postText: {
     backgroundColor: colors.gray02,
     paddingHorizontal: 20,
     paddingVertical: 5,
@@ -21,12 +21,12 @@ const NewPostStyle = StyleSheet.create({
     borderRadius: 20,
     marginLeft: 10
   },
-  newPostButton: {
+  postButton: {
     backgroundColor: colors.main,
     width: 'min-content',
     marginTop: 10
   },
-  createNewPostWrapper: {
+  createPostWrapper: {
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'center',
@@ -36,7 +36,11 @@ const NewPostStyle = StyleSheet.create({
     justifyContent: 'right',
     display: 'flex',
     alignItems: 'center'
+  },
+  userDataStyle: {
+    display: 'flex',
+    flexDirection: 'column'
   }
 });
 
-export default NewPostStyle;
+export default PostStyle;

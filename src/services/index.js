@@ -31,6 +31,18 @@ const sendNewPost = async (idUser, idGroup, description) => {
   return response;
 };
 
+const getPostsByGroups = async (groupIds) => {
+  const response = await apiClient
+    .get(`${API_BASE_URL}/post/posts` , {
+      groupIds
+    })
+    .catch((err) => {
+      console.error("ops! ocorreu um erro: " + err);
+      alert("Não foi possível receber as mensagens desse grupo!");
+    });
+  return response;
+};
+
 const login = async (username, password) => {
   const returnData = USE_MOCK
     ? mockLoginData()
@@ -38,4 +50,4 @@ const login = async (username, password) => {
   return returnData;
 };
 
-export { login, sendNewPost };
+export { login, sendNewPost, getPostsByGroups };
