@@ -1,4 +1,5 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet } from "react-native"
+import { colors } from '../../styles'
 
 const FeedStyle = StyleSheet.create({
   feedWrapper: {
@@ -19,7 +20,8 @@ const FeedStyle = StyleSheet.create({
     flexDirection: 'row',
     display: 'flex',
     flexDirection: 'column',
-    alignItems: 'center'
+    alignItems: 'center',
+    backgroundColor: colors.gray005
   }
 });
 
