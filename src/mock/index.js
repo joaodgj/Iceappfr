@@ -2,7 +2,7 @@ import { token, profile_picture } from "./data.json"
 import jwt_decode from "jwt-decode"
 
 const mockLoginData = () => {
-    return jwt_decode(token)
+    return {data: { token }, status: 200 }
 }
 
 const mockProfilePicture = () => {

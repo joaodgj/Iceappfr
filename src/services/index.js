@@ -17,6 +17,32 @@ const apiLogin = async (username, password) => {
   return response;
 };
 
+const sendNewPost = async (idUser, idGroup, description) => {
+  const response = await apiClient
+    .post(`${API_BASE_URL}/post`, {
+      idUser,
+      idGroup,
+      description
+    })
+    .catch((err) => {
+      console.error("ops! ocorreu um erro: " + err);
+      alert("Não foi possível realizar a postagem");
+    });
+  return response;
+};
+
+const getPostsByGroups = async (groupIds) => {
+  const response = await apiClient
+    .get(`${API_BASE_URL}/post/posts` , {
+      groupIds
+    })
+    .catch((err) => {
+      console.error("ops! ocorreu um erro: " + err);
+      alert("Não foi possível receber as mensagens desse grupo!");
+    });
+  return response;
+};
+
 const login = async (username, password) => {
   const returnData = USE_MOCK
     ? mockLoginData()
@@ -24,8 +50,4 @@ const login = async (username, password) => {
   return returnData;
 };
 
-const getProfilePicture = () => {
-  return USE_MOCK ? mockProfilePicture() : null;
-};
-
-export { login, getProfilePicture };
+export { login, sendNewPost, getPostsByGroups };
