@@ -40,7 +40,7 @@ const NewPost = (props) => {
                 />
             </View>
             <View style={buttonsWrapper}>
-                <Button buttonStyle={newPostButton} title="Send" accessibilityLabel="Create new post" onPress={sendPostHandler} />
+                <Button buttonStyle={newPostButton} title="Postar" accessibilityLabel="Create new post" onPress={sendPostHandler} />
             </View>
         </View>
     )
