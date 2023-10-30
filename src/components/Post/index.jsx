@@ -5,7 +5,7 @@ import { timestampToString } from '../../utils'
 import { Button } from "../"
 
 const Post = (props) => {
-    const { description, user, createdAt, commentsCount } = props.data
+    const { description, user, createdAt, commentsCount, media } = props.data
     const {
         postWrapper,
         profilePictureStyle,
@@ -20,7 +20,9 @@ const Post = (props) => {
         buttomsIconStyle,
         commentButtomStyle,
         likeButtonTextStyle,
-        commentButtonTextStyle
+        commentButtonTextStyle,
+        postMediaStyle,
+        mediaImageStyle
     } = PostStyle
 
     const likeButtomIcon = <Image style={buttomsIconStyle} source={require("../../assets/icons/like.png")} />
@@ -37,6 +39,13 @@ const Post = (props) => {
                 </View>
             </View>
             <Text style={descriptionStyle}>{description}</Text>
+            {media.length > 0 ?
+                <View style={postMediaStyle}>
+                    {
+                        media.map((media, index) => <Image style={mediaImageStyle} key={index} source={{ uri: media.url }} />)
+                    }
+                </View>
+            : null }
             <View style={commentsWrapper}>
                 <Image style={commentIconStyle} source={require("../../assets/icons/comment.png")} />
                 <Text>{commentsCount}</Text>

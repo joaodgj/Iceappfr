@@ -3,7 +3,7 @@ import { colors } from '../../styles'
 
 const PostStyle = StyleSheet.create({
   postWrapper: {
-    flex: 1,
+    display: 'flex',
     paddingVertical: 25,
     alignItems: 'center',
     width: 300
@@ -89,6 +89,15 @@ const PostStyle = StyleSheet.create({
     height: 27,
     width: 29
   },
+  postMediaStyle: {
+    overflow: 'auto',
+    height: 150,
+    width: 'inherit'
+  },
+  mediaImageStyle: {
+    resizeMode: 'contain',
+    height: '100%'
+  }
 });
 
 export default PostStyle;
