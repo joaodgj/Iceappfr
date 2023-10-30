@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from 'react'
+import React, { useEffect, useState, useContext, useCallback } from 'react'
 import { View, Image } from 'react-native'
 import { AuthContext } from "../../contexts/auth"
 import { Header, NewPost, Posts } from '../../components'
@@ -17,15 +17,16 @@ const Feed = () => {
     const { auth } = useContext(AuthContext);
 
     useEffect(() => {
-        console.log(auth)
         setProfilePicture(auth.profile_image_url)
         setUserNickname(auth.nickname)
         setUserGroups(auth.arrayGroups)
         setCurrentGroup(auth.arrayGroups[0])
         setUserId(auth.userId)
+        renewFeedHandler(auth.arrayGroups[0])
     }, [])
 
-    useEffect(() => {
+    
+    const renewFeedHandler = useCallback((currentGroup) => {
         if (currentGroup)
             getPostsByGroups(currentGroup.groupId).then(response => {
                 if (response.status === 200) {
@@ -33,7 +34,6 @@ const Feed = () => {
                 }
             })
     }, [currentGroup])
-    
 
     return (
         <View style={feedWrapper}>
@@ -42,7 +42,7 @@ const Feed = () => {
                 <Image style={profilePictureStyle} source={{ uri: profilePicture }} />
             </Header>
             <View style={contentWrapper}>
-                <NewPost profilePicture={profilePicture} userNickname={userNickname} userGroupToSendMessage={currentGroup} userId={userId} />
+                <NewPost profilePicture={profilePicture} userNickname={userNickname} userGroupToSendMessage={currentGroup} userId={userId} renewFeed={renewFeedHandler} />
                 <Posts data={posts} />
             </View>
         </View>

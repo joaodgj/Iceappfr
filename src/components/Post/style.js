@@ -5,12 +5,14 @@ const PostStyle = StyleSheet.create({
   postWrapper: {
     flex: 1,
     paddingVertical: 25,
-    alignItems: 'center'
+    alignItems: 'center',
+    width: 300
   },
   profilePictureStyle: {
-    width: 40,
-    height: 40,
+    width: 70,
+    height: 70,
     borderRadius: 20,
+    marginRight: 10
   },
   postText: {
     backgroundColor: colors.gray02,
@@ -21,26 +23,72 @@ const PostStyle = StyleSheet.create({
     borderRadius: 20,
     marginLeft: 10
   },
-  postButton: {
-    backgroundColor: colors.main,
+  likeButtomStyle: {
+    backgroundColor: colors.true,
     width: 'min-content',
-    marginTop: 10
+    marginTop: 10,
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center'
   },
-  createPostWrapper: {
+  commentButtomStyle: {
+    backgroundColor: colors.true,
+    width: 'min-content',
+    marginTop: 10,
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center'
+  },
+  headerPostWrapper: {
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'center',
-    width: 'min-content'
+    width: 'min-content',
+    marginBottom: 20
   },
   buttonsWrapper: {
     justifyContent: 'right',
     display: 'flex',
-    alignItems: 'center'
+    flexDirection: 'row',
+    width: 'inherit',
+    alignItems: 'center',
+    justifyContent: 'space-between'
   },
   userDataStyle: {
     display: 'flex',
-    flexDirection: 'column'
-  }
+    flexDirection: 'column',
+    paddingTop: 10
+  },
+  datetimeStyle: {
+    marginTop: 5,
+    fontSize: 12
+  },
+  commentIconStyle: {
+    width: 35,
+    height: 30,
+    marginRight: 10
+  },
+  commentsWrapper: {
+    width: 'inherit',
+    marginTop: 10,
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center'
+  },
+  descriptionStyle: {
+    marginBottom: 10
+  },
+  likeButtonTextStyle: {
+    fontSize: 14
+  },
+  commentButtonTextStyle: {
+    fontSize: 14
+  },
+  buttomsIconStyle: {
+    marginRight: 10,
+    height: 27,
+    width: 29
+  },
 });
 
 export default PostStyle;

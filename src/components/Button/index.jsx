@@ -2,12 +2,13 @@ import { Pressable, Text } from "react-native"
 import ButtonStyle from "./style"
 
 const Button = (props) => {
-    const { title, onPress, buttonStyle, textStyle } = props
+    const { title, onPress, buttonStyle, textStyle, buttonIcon } = props
     const { buttonWrapper, buttonText } = ButtonStyle
 
     return (
         <Pressable style={{...buttonStyle, ...buttonWrapper}} onPress={onPress}>
-            <Text style={{...textStyle, ...buttonText}}>{title}</Text>
+            {buttonIcon ? buttonIcon : null}
+            <Text style={{...buttonText, ...textStyle}}>{title}</Text>
         </Pressable>
     )
 };

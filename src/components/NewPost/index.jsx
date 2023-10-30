@@ -6,7 +6,7 @@ import { Button } from "../"
 import { sendNewPost } from "../../services";
 
 const NewPost = (props) => {
-    const { profilePicture, userNickname, userGroupToSendMessage, userId } = props
+    const { profilePicture, userNickname, userGroupToSendMessage, userId, renewFeed } = props
     const { newPostWrapper, profilePictureStyle, newPostTextInput, newPostButton, createNewPostWrapper, buttonsWrapper } = NewPostStyle
     const [newPostDescription, setNewPostDescription] = useState('');
 
@@ -15,12 +15,14 @@ const NewPost = (props) => {
 
     const sendPostHandler = async () => {
         sendNewPost(userId, userGroupToSendMessage.groupId, newPostDescription).then(response => {
-            if (response.status === 200) {
+            if (response.status === 201) {
                 if (Platform.OS === 'web') {
                     alert('Sua postagem foi realizada com sucesso!!!')
                 } else {
                     createBasicAlert('Postagem Realizada', 'Sua postagem foi realizada com sucesso!!!')
                 }
+                setNewPostDescription('')
+                renewFeed(userGroupToSendMessage)
             }
         })
     };
