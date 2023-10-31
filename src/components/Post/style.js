@@ -23,36 +23,12 @@ const PostStyle = StyleSheet.create({
     borderRadius: 20,
     marginLeft: 10
   },
-  likeButtomStyle: {
-    backgroundColor: colors.true,
-    width: 'min-content',
-    marginTop: 10,
-    display: 'flex',
-    flexDirection: 'row',
-    alignItems: 'center'
-  },
-  commentButtomStyle: {
-    backgroundColor: colors.true,
-    width: 'min-content',
-    marginTop: 10,
-    display: 'flex',
-    flexDirection: 'row',
-    alignItems: 'center'
-  },
   headerPostWrapper: {
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'center',
     width: 'min-content',
     marginBottom: 20
-  },
-  buttonsWrapper: {
-    justifyContent: 'right',
-    display: 'flex',
-    flexDirection: 'row',
-    width: 'inherit',
-    alignItems: 'center',
-    justifyContent: 'space-between'
   },
   userDataStyle: {
     display: 'flex',
@@ -64,30 +40,25 @@ const PostStyle = StyleSheet.create({
     fontSize: 12
   },
   commentIconStyle: {
-    width: 35,
-    height: 30,
+    width: 30,
+    height: 25,
     marginRight: 10
   },
-  commentsWrapper: {
+  likeIconStyle: {
+    width: 26,
+    height: 25,
+    marginRight: 10
+  },
+  indicatorsWrapper: {
     width: 'inherit',
     marginTop: 10,
     display: 'flex',
     flexDirection: 'row',
-    alignItems: 'center'
+    alignItems: 'center',
+    justifyContent: 'space-around'
   },
   descriptionStyle: {
     marginBottom: 10
-  },
-  likeButtonTextStyle: {
-    fontSize: 14
-  },
-  commentButtonTextStyle: {
-    fontSize: 14
-  },
-  buttomsIconStyle: {
-    marginRight: 10,
-    height: 27,
-    width: 29
   },
   postMediaStyle: {
     overflow: 'auto',
@@ -97,6 +68,16 @@ const PostStyle = StyleSheet.create({
   mediaImageStyle: {
     resizeMode: 'contain',
     height: '100%'
+  },
+  commentsWrapper: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center'
+  },
+  likesWrapper: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center'
   }
 });
 

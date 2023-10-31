@@ -50,4 +50,14 @@ const login = async (username, password) => {
   return returnData;
 };
 
-export { login, sendNewPost, getPostsByGroups };
+const getCommentsByPost = async (postId) => {
+  const response = await apiClient
+  .get(`${API_BASE_URL}/comment`)
+  .catch((err) => {
+    console.error("ops! ocorreu um erro: " + err);
+    alert("Não foi possível receber as mensagens desse grupo!");
+  });
+  return response;
+};
+
+export { login, sendNewPost, getPostsByGroups, getCommentsByPost };

@@ -1,33 +1,40 @@
-import { View, Image, Text } from "react-native"
+import { useState } from 'react'
+import { View, Image, Text, Pressable } from "react-native"
 import PostStyle from "./style"
 import { timestampToString } from '../../utils'
+import { getCommentsByPost } from '../../services'
 
-import { Button } from "../"
+import { colors } from '../../styles'
 
 const Post = (props) => {
-    const { description, user, createdAt, commentsCount, media } = props.data
+    const { id, description, user, createdAt, commentsCount, media, likesCount } = props.data
     const {
         postWrapper,
         profilePictureStyle,
-        likeButtomStyle,
         headerPostWrapper,
-        buttonsWrapper,
         userDataStyle,
         datetimeStyle,
         commentIconStyle,
-        commentsWrapper,
+        indicatorsWrapper,
         descriptionStyle,
-        buttomsIconStyle,
-        commentButtomStyle,
-        likeButtonTextStyle,
-        commentButtonTextStyle,
+        likeIconStyle,
         postMediaStyle,
-        mediaImageStyle
+        mediaImageStyle,
+        commentsWrapper,
+        likesWrapper
     } = PostStyle
+    const [postComments, setPostComments] = useState()
+    const [showPostComments, setShowPostComments] = useState()
 
-    const likeButtomIcon = <Image style={buttomsIconStyle} source={require("../../assets/icons/like.png")} />
+    const commentsHandler = () => {
+        setShowPostComments(!showPostComments)
 
-    const commentButtomIcon = <Image style={buttomsIconStyle} source={require("../../assets/icons/whiteComment.png")} />
+        getCommentsByPost(id).then(response => {
+            if (response.status === 200) {
+                setPostComments(response.data)
+            }
+        })
+    }
 
     return (
         <View style={postWrapper}>
@@ -46,14 +53,23 @@ const Post = (props) => {
                     }
                 </View>
             : null }
-            <View style={commentsWrapper}>
-                <Image style={commentIconStyle} source={require("../../assets/icons/comment.png")} />
-                <Text>{commentsCount}</Text>
+            <View style={indicatorsWrapper}>
+                <Pressable style={commentsWrapper} onPress={commentsHandler} >
+                    <Image style={commentIconStyle} source={require("../../assets/icons/comment.png")} />
+                    <Text>{commentsCount}</Text>
+                </Pressable>
+                <Pressable style={likesWrapper}>
+                    <Image style={likeIconStyle} source={require(`../../assets/icons/${false ? 'mainLike' : 'like'}.png`)} />
+                    <Text style={false ? {color: colors.main} : {}}>{likesCount}</Text>
+                </Pressable>
             </View>
-            <View style={buttonsWrapper}>
-                <Button buttonIcon={likeButtomIcon} buttonStyle={likeButtomStyle} textStyle={likeButtonTextStyle} title="Curtir" accessibilityLabel="Curtir postagem" />
-                <Button buttonIcon={commentButtomIcon} buttonStyle={commentButtomStyle} textStyle={commentButtonTextStyle} title="Comentar" accessibilityLabel="Comentar na postagem" />
-            </View>
+            {showPostComments
+                ? <View>
+                    <Text>
+                        {"testando"}
+                    </Text>
+                </View> 
+                : null}
         </View>
     )
 };

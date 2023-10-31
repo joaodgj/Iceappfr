@@ -14,6 +14,7 @@ const NewPost = (props) => {
         Alert.alert(title, message, [{ text: 'OK', onPress: () => console.log('OK Pressed') }]);
 
     const sendPostHandler = async () => {
+        if (newPostDescription === '') return
         sendNewPost(userId, userGroupToSendMessage.groupId, newPostDescription).then(response => {
             if (response.status === 201) {
                 if (Platform.OS === 'web') {
