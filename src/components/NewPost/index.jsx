@@ -17,13 +17,8 @@ const NewPost = (props) => {
         if (newPostDescription === '') return
         sendNewPost(userId, userGroupToSendMessage.groupId, newPostDescription).then(response => {
             if (response.status === 201) {
-                if (Platform.OS === 'web') {
-                    alert('Sua postagem foi realizada com sucesso!!!')
-                } else {
-                    createBasicAlert('Postagem Realizada', 'Sua postagem foi realizada com sucesso!!!')
-                }
                 setNewPostDescription('')
-                renewFeed(userGroupToSendMessage)
+                renewFeed(userGroupToSendMessage, 0)
             }
         })
     };

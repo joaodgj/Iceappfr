@@ -1,4 +1,4 @@
-import { mockLoginData, mockProfilePicture } from "../mock";
+import { mockLoginData } from "../mock";
 import apiClient from "./api";
 
 const USE_MOCK = false;
@@ -103,4 +103,41 @@ const getLikesCountByPost = async (postId) => {
   return response;
 };
 
-export { login, sendNewPost, getPostsByGroups, getCommentsByPost, likePost, unlikePost, getLikesCountByPost };
+const forgotPassword = async (username) => {
+  const response = await apiClient
+    .post(`${API_BASE_URL}/forgot-password`, {
+      username
+    })
+    .catch((err) => {
+      console.error("ops! ocorreu um erro: " + err);
+      alert("Não foi possível resetar sua senha");
+    });
+  return response;
+};
+
+const forgotUserName = async (email) => {
+  const response = await apiClient
+    .post(`${API_BASE_URL}/submit-username`, {
+      email
+    })
+    .catch((err) => {
+      console.error("ops! ocorreu um erro: " + err);
+      alert("Não foi possível enviar os usernames dessa conta");
+    });
+  return response;
+};
+
+const passwordReset = async (resetToken, newPassword) => {
+  const response = await apiClient
+    .post(`${API_BASE_URL}/reset-password`, {
+      resetToken,
+      newPassword
+    })
+    .catch((err) => {
+      console.error("ops! ocorreu um erro: " + err);
+      alert("Não foi possível resetar a senha!");
+    });
+  return response;
+};
+
+export { login, sendNewPost, getPostsByGroups, getCommentsByPost, likePost, unlikePost, getLikesCountByPost, forgotPassword, forgotUserName, passwordReset };

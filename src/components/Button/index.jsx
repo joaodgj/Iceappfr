@@ -6,7 +6,7 @@ const Button = (props) => {
     const { buttonWrapper, buttonText } = ButtonStyle
 
     return (
-        <Pressable style={{...buttonStyle, ...buttonWrapper}} onPress={onPress}>
+        <Pressable style={{...buttonWrapper, ...buttonStyle}} onPress={onPress}>
             {buttonIcon ? buttonIcon : null}
             <Text style={{...buttonText, ...textStyle}}>{title}</Text>
         </Pressable>

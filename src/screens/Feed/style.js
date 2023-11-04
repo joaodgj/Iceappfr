@@ -3,7 +3,7 @@ import { colors } from '../../styles'
 
 const FeedStyle = StyleSheet.create({
   feedWrapper: {
-    flex: 1,
+    display: 'flex',
   },
   logoStyle: {
     width: 59,

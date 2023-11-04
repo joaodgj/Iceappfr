@@ -1,25 +1,19 @@
-import { useContext, useState } from "react";
+import { useState } from "react"
 import { View, Image, Text } from "react-native"
 import { useNavigation } from "@react-navigation/native"
 import ForgotUserNameStyle from "./style"
 import { Button, TextInput } from "../../components"
-import { getProfilePicture, forgotUserName } from "../../services";
-import { AuthContext } from "../../contexts/auth"
-import apiClient from "../../services/api";
-import jwt_decode from "jwt-decode";
+import { forgotUserName } from "../../services"
 
 const ForgotUserName = () => {
   const [email, onChangeEmail] = useState('')
   const navigation = useNavigation();
-  const { setAuth } = useContext(AuthContext);
 
   const { loginWrapper, viewScreen, viewButton, logoStyle, brandName, title, text } = ForgotUserNameStyle
 
-  const handlePW = async () => {
+  const handleSendButton = async () => {
     forgotUserName(email).then(response => {
-      setAuth({ token: response.data.token, ...jwt_decode(response.data.token), profilePicture: getProfilePicture() })
       if (response.status === 200) {
-        apiClient.defaults.headers.Authorization = `Baerer ${response.data.token}`;
         navigation.navigate("Login");
       }
     });
@@ -44,7 +38,7 @@ const ForgotUserName = () => {
         <View style={viewButton}>
         <Button
           title="Enviar"
-          onPress={handlePW}
+          onPress={handleSendButton}
         /> 
         <Button
         title="Voltar"

@@ -59,7 +59,7 @@ const Feed = () => {
                 <Image style={logoStyle} source={require("../../assets/logo.png")} />
                 <Image style={profilePictureStyle} source={{ uri: profilePicture }} />
             </Header>
-            <ScrollView style={contentWrapper}>
+            <ScrollView contentContainerStyle={contentWrapper}>
                 <NewPost
                     profilePicture={profilePicture}
                     userNickname={userNickname}

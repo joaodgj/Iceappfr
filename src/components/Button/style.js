@@ -5,7 +5,8 @@ const ButtonStyle = StyleSheet.create({
     buttonWrapper: {
         borderRadius: 4,
         paddingHorizontal: 16,
-        paddingVertical: 8
+        paddingVertical: 8,
+        backgroundColor: colors.true
     },
     buttonText: {
         fontSize: 20,

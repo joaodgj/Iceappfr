@@ -3,28 +3,25 @@ import { View, Image, Text } from "react-native"
 import { useNavigation } from "@react-navigation/native"
 import PasswordResetStyle from "./style"
 import { Button, TextInput } from "../../components"
-import { getProfilePicture, passwordReset } from "../../services";
-import { AuthContext } from "../../contexts/auth"
-import apiClient from "../../services/api";
-import jwt_decode from "jwt-decode";
+import { passwordReset } from "../../services";
 
 const PasswordReset = () => {
   const [token, onChangetoken] = useState('')
   const [newPW, onChangenewPW] = useState('')
   const [newPWConfirmed, onChangenewPWConfirmed] = useState('')
   const navigation = useNavigation();
-  const { setAuth } = useContext(AuthContext);
 
   const { loginWrapper, viewScreen, logoStyle, brandName, title, text } = PasswordResetStyle
 
   const handlePW = async () => {
-    passwordReset(userName).then(response => {
-      setAuth({ token: response.data.token, ...jwt_decode(response.data.token), profilePicture: getProfilePicture() })
-      if (response.status === 200) {
-        apiClient.defaults.headers.Authorization = `Baerer ${response.data.token}`;
-        navigation.navigate("Login");
-      }
-    });
+    if (newPWConfirmed !== newPW ) {
+      alert("Senhas não batem!")
+    } else
+      passwordReset(token, newPW).then(response => {
+        if (response.status === 200) {
+          navigation.navigate("Login");
+        }
+      });
   };
 
   return (
