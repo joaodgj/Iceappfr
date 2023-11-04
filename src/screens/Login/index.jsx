@@ -35,23 +35,11 @@ const Login = () => {
   };
 
   const forgotPW = async () => {
-    login(username, password).then(response => {
-      setAuth({ token: response.data.token, ...jwt_decode(response.data.token), profilePicture: getProfilePicture() })
-      if (response.status === 200) {
-        apiClient.defaults.headers.Authorization = `Baerer ${response.data.token}`;
-        navigation.navigate("ForgotPassword");
-      }
-    });
+    navigation.navigate("ForgotPassword");
   };
 
   const forgotUN = async () => {
-    login(username, password).then(response => {
-      setAuth({ token: response.data.token, ...jwt_decode(response.data.token), profilePicture: getProfilePicture() })
-      if (response.status === 200) {
-        apiClient.defaults.headers.Authorization = `Baerer ${response.data.token}`;
-        navigation.navigate("ForgotUserName");
-      }
-    });
+    navigation.navigate("ForgotUserName");
   };
 
   return (
