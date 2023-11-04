@@ -31,17 +31,24 @@ const sendNewPost = async (idUser, idGroup, description) => {
   return response;
 };
 
-const getPostsByGroups = async (groupIds) => {
+const getPostsByGroups = async (groupIds, page) => {
+  const take = 10;
+  const skip = page * take; // Calcula o número correto de posts a pular
+
   const response = await apiClient
-    .get(`${API_BASE_URL}/post/posts` , {
-      groupIds
+    .get(`${API_BASE_URL}/post/posts`, {
+      params: {
+        groupIds,
+        skip,
+        take
+      }
     })
     .catch((err) => {
       console.error("ops! ocorreu um erro: " + err);
-      alert("Não foi possível receber as mensagens desse grupo!");
     });
   return response;
 };
+
 
 const login = async (username, password) => {
   const returnData = USE_MOCK
