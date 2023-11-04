@@ -60,4 +60,40 @@ const getCommentsByPost = async (postId) => {
   return response;
 };
 
-export { login, sendNewPost, getPostsByGroups, getCommentsByPost };
+const likePost = async (postId) => {
+  const response = await apiClient
+    .post(`${API_BASE_URL}/like`, {
+      postId
+    })
+    .catch((err) => {
+      console.error("ops! ocorreu um erro: " + err);
+      alert("Não foi possível curtir a postagem");
+    });
+  return response;
+};
+
+const unlikePost = async (postId) => {
+  const response = await apiClient
+    .delete(`${API_BASE_URL}/like`, {
+      postId
+    })
+    .catch((err) => {
+      console.error("ops! ocorreu um erro: " + err);
+      alert("Não foi possível descurtir a postagem");
+    });
+  return response;
+};
+
+const getLikesCountByPost = async (postId) => {
+  const response = await apiClient
+    .post(`${API_BASE_URL}/like`, {
+      postId
+    })
+    .catch((err) => {
+      console.error("ops! ocorreu um erro: " + err);
+      alert("Não foi possível ver a quantidade de postagens");
+    });
+  return response;
+};
+
+export { login, sendNewPost, getPostsByGroups, getCommentsByPost, likePost, unlikePost, getLikesCountByPost };
