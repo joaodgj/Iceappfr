@@ -4,8 +4,9 @@ import { colors } from '../../styles'
 const NewPostStyle = StyleSheet.create({
   newPostWrapper: {
     display: 'flex',
-    paddingTop: 25,
-    alignItems: 'center'
+    padding: 25,
+    alignItems: 'center',
+    boxShadow: '0px 4px 4px 0px rgba(0, 0, 0, 0.25)'
   },
   profilePictureStyle: {
     width: 40,

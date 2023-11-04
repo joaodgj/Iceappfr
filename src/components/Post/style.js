@@ -5,8 +5,10 @@ const PostStyle = StyleSheet.create({
   postWrapper: {
     display: 'flex',
     paddingVertical: 25,
-    alignItems: 'center',
-    width: 300
+    width: '100%',
+    paddingLeft: 10,
+    paddingRight: 10,
+    boxShadow: '0px 4px 4px 0px rgba(0, 0, 0, 0.25)'
   },
   profilePictureStyle: {
     width: 70,
@@ -26,8 +28,7 @@ const PostStyle = StyleSheet.create({
   headerPostWrapper: {
     display: 'flex',
     flexDirection: 'row',
-    justifyContent: 'center',
-    width: 'min-content',
+    alignItems: 'center',
     marginBottom: 20
   },
   userDataStyle: {
