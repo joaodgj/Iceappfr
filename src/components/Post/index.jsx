@@ -7,7 +7,7 @@ import { getCommentsByPost, likePost, unlikePost } from '../../services'
 import { colors } from '../../styles'
 
 const Post = (props) => {
-    const { id, description, user, createdAt, commentsCount, media, likesCount } = props.data
+    const { id, description, user, createdAt, commentsCount, media, likesCount, userHasLiked } = props.data
     const {
         postWrapper,
         profilePictureStyle,
@@ -25,7 +25,7 @@ const Post = (props) => {
     } = PostStyle
     const [postComments, setPostComments] = useState('posts')
     const [showPostComments, setShowPostComments] = useState()
-    const [postLiked, setPostLiked] = useState(false)
+    const [postLiked, setPostLiked] = useState(userHasLiked)
     const [likes, setLikes] = useState(likesCount)
 
     const commentsHandler = () => {
