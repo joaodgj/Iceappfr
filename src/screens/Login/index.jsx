@@ -14,7 +14,15 @@ const Login = () => {
   const navigation = useNavigation();
   const { setAuth } = useContext(AuthContext);
 
-  const { loginWrapper, viewScreen, logoStyle, brandName, loginButtonStyle } = LoginStyle
+  const {
+    loginWrapper,
+    viewScreen,
+    logoStyle,
+    brandName,
+    loginButtonStyle,
+    forgotPassword,
+    forgotUserName
+  } = LoginStyle
 
   const handleLogin = async () => {
     login(username, password).then(response => {
@@ -22,6 +30,26 @@ const Login = () => {
       if (response.status === 200) {
         apiClient.defaults.headers.Authorization = `Baerer ${response.data.token}`;
         navigation.navigate("Feed");
+      }
+    });
+  };
+
+  const forgotPW = async () => {
+    login(username, password).then(response => {
+      setAuth({ token: response.data.token, ...jwt_decode(response.data.token), profilePicture: getProfilePicture() })
+      if (response.status === 200) {
+        apiClient.defaults.headers.Authorization = `Baerer ${response.data.token}`;
+        navigation.navigate("ForgotPassword");
+      }
+    });
+  };
+
+  const forgotUN = async () => {
+    login(username, password).then(response => {
+      setAuth({ token: response.data.token, ...jwt_decode(response.data.token), profilePicture: getProfilePicture() })
+      if (response.status === 200) {
+        apiClient.defaults.headers.Authorization = `Baerer ${response.data.token}`;
+        navigation.navigate("ForgotUserName");
       }
     });
   };
@@ -47,6 +75,8 @@ const Login = () => {
           onPress={handleLogin}
           buttonStyle={loginButtonStyle}
         />
+        <Text style={forgotUserName} onPress={forgotUN}>Esqueci o nome de usuário</Text>
+        <Text style={forgotPassword} onPress={forgotPW}>Esqueci a senha</Text>
       </View>
     </View>
   );

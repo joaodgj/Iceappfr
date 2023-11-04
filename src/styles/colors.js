@@ -6,7 +6,8 @@ const colors = {
     gray04: '#626262',
     gray05: '#080000',
     main: '#566AE5',
-    true: '#63E64C'
+    true: '#63E64C',
+    blue01: '#4364B9',
 }
 
 export default colors
