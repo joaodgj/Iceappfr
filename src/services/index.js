@@ -75,7 +75,7 @@ const likePost = async (postId) => {
 const unlikePost = async (postId) => {
   const response = await apiClient
     .delete(`${API_BASE_URL}/like`, {
-      postId
+      data: { postId }
     })
     .catch((err) => {
       console.error("ops! ocorreu um erro: " + err);

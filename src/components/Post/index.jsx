@@ -43,14 +43,14 @@ const Post = (props) => {
             unlikePost(id).then(response => {
                 if (response.status === 200) {
                     setPostLiked(false)
-                    setLikes(likesCount - 1)
+                    setLikes(likes - 1)
                 }
             })
         else
             likePost(id).then(response => {
-                if (response.status === 200) {
+                if (response.status === 201) {
                     setPostLiked(true)
-                    setLikes(likesCount + 1)
+                    setLikes(likes + 1)
                 }
             })
     }    
