@@ -1,13 +1,13 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { View, Image, Text, Pressable } from "react-native"
 import PostStyle from "./style"
 import { timestampToString } from '../../utils'
-import { getCommentsByPost } from '../../services'
+import { getCommentsByPost, likePost, unlikePost } from '../../services'
 
 import { colors } from '../../styles'
 
 const Post = (props) => {
-    const { id, description, user, createdAt, commentsCount, media, likesCount } = props.data
+    const { id, description, user, createdAt, commentsCount, media, likesCount, userHasLiked } = props.data
     const {
         postWrapper,
         profilePictureStyle,
@@ -23,8 +23,10 @@ const Post = (props) => {
         commentsWrapper,
         likesWrapper
     } = PostStyle
-    const [postComments, setPostComments] = useState()
+    const [postComments, setPostComments] = useState('posts')
     const [showPostComments, setShowPostComments] = useState()
+    const [postLiked, setPostLiked] = useState(userHasLiked)
+    const [likes, setLikes] = useState(likesCount)
 
     const commentsHandler = () => {
         setShowPostComments(!showPostComments)
@@ -35,6 +37,23 @@ const Post = (props) => {
             }
         })
     }
+
+    const likeUnlikePostHandler = () => {
+        if (postLiked)
+            unlikePost(id).then(response => {
+                if (response.status === 200) {
+                    setPostLiked(false)
+                    setLikes(likesCount - 1)
+                }
+            })
+        else
+            likePost(id).then(response => {
+                if (response.status === 200) {
+                    setPostLiked(true)
+                    setLikes(likesCount + 1)
+                }
+            })
+    }    
 
     return (
         <View style={postWrapper}>
@@ -58,15 +77,16 @@ const Post = (props) => {
                     <Image style={commentIconStyle} source={require("../../assets/icons/comment.png")} />
                     <Text>{commentsCount}</Text>
                 </Pressable>
-                <Pressable style={likesWrapper}>
-                    <Image style={likeIconStyle} source={require(`../../assets/icons/${false ? 'mainLike' : 'like'}.png`)} />
-                    <Text style={false ? {color: colors.main} : {}}>{likesCount}</Text>
+                <Pressable style={likesWrapper} onPress={likeUnlikePostHandler} >
+                    { postLiked ? <Image style={likeIconStyle} source={require('../../assets/icons/mainLike.png')} />
+                    : <Image style={likeIconStyle} source={require('../../assets/icons/like.png')} /> }
+                    <Text style={postLiked ? {color: colors.main} : {}}>{likes}</Text>
                 </Pressable>
             </View>
             {showPostComments
                 ? <View>
                     <Text>
-                        {"testando"}
+                        {postComments}
                     </Text>
                 </View> 
                 : null}
