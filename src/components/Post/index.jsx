@@ -21,7 +21,8 @@ const Post = (props) => {
         postMediaStyle,
         mediaImageStyle,
         commentsWrapper,
-        likesWrapper
+        likesWrapper,
+        userNameStyle
     } = PostStyle
     const [postComments, setPostComments] = useState('posts')
     const [showPostComments, setShowPostComments] = useState()
@@ -60,7 +61,7 @@ const Post = (props) => {
             <View style={headerPostWrapper}>
                 <Image style={profilePictureStyle} source={{ uri: user.profileImageUrl }} />
                 <View style={userDataStyle}>
-                    <Text>{user.name}</Text>
+                    <Text style={userNameStyle}>{user.name}</Text>
                     <Text style={datetimeStyle}>{timestampToString(createdAt)}</Text>
                 </View>
             </View>

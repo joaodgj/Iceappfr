@@ -58,6 +58,9 @@ const PostStyle = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-around'
   },
+  userNameStyle: {
+    maxWidth: 220
+  },
   descriptionStyle: {
     marginBottom: 10
   },
