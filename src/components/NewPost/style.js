@@ -3,6 +3,7 @@ import { colors } from '../../styles'
 
 const NewPostStyle = StyleSheet.create({
   newPostWrapper: {
+    marginVertical: 50,
     display: 'flex',
     padding: 25,
     alignItems: 'center',

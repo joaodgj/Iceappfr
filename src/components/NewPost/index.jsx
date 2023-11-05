@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { View, Image, TextInput, Alert, Platform } from "react-native"
+import { View, Image, TextInput } from "react-native"
 import NewPostStyle from "./style"
 
 import { Button } from "../"
@@ -9,10 +9,7 @@ const NewPost = (props) => {
     const { profilePicture, userNickname, userGroupToSendMessage, userId, renewFeed } = props
     const { newPostWrapper, profilePictureStyle, newPostTextInput, newPostButton, createNewPostWrapper, buttonsWrapper } = NewPostStyle
     const [newPostDescription, setNewPostDescription] = useState('');
-
-    const createBasicAlert = (title, message) =>
-        Alert.alert(title, message, [{ text: 'OK', onPress: () => console.log('OK Pressed') }]);
-
+    
     const sendPostHandler = async () => {
         if (newPostDescription === '') return
         sendNewPost(userId, userGroupToSendMessage.groupId, newPostDescription).then(response => {

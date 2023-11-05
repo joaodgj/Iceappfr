@@ -2,7 +2,6 @@ import Button from "./Button"
 import TextInput from "./TextInput"
 import Header from "./Header"
 import NewPost from "./NewPost"
-import Posts from "./Posts"
 import Post from "./Post"
 
 export {
@@ -10,6 +9,5 @@ export {
     TextInput,
     Header,
     NewPost,
-    Posts,
     Post
 }

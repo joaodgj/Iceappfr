@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useContext, useCallback } from 'react';
-import { View, Image, Button, ScrollView } from 'react-native';
+import { View, Image, FlatList } from 'react-native';
 import { AuthContext } from "../../contexts/auth";
-import { Header, NewPost, Posts } from '../../components';
+import { Header, NewPost, Post } from '../../components';
 import { getPostsByGroups } from '../../services';
 import FeedStyle from './style';
 
@@ -12,7 +12,7 @@ const Feed = () => {
     const [userGroups, setUserGroups] = useState();
     const [currentGroup, setCurrentGroup] = useState();
     const [userId, setUserId] = useState();
-    const [posts, setPosts] = useState([]);
+    const [posts, setPosts] = useState();
     const [page, setPage] = useState(0);
     const [hasMore, setHasMore] = useState(true);
 
@@ -50,8 +50,16 @@ const Feed = () => {
     }, [page, currentGroup, renewFeedHandler]);
 
     const handleLoadMore = () => {
-        setPage(prevPage => prevPage + 1);
+        if (hasMore) setPage(prevPage => prevPage + 1);
     };
+
+    const newPost = <NewPost
+    profilePicture={profilePicture}
+    userNickname={userNickname}
+    userGroupToSendMessage={currentGroup}
+    userId={userId}
+    renewFeed={() => renewFeedHandler(currentGroup, 0)}
+/>
 
     return (
         <View style={feedWrapper}>
@@ -59,22 +67,16 @@ const Feed = () => {
                 <Image style={logoStyle} source={require("../../assets/logo.png")} />
                 <Image style={profilePictureStyle} source={{ uri: profilePicture }} />
             </Header>
-            <ScrollView contentContainerStyle={contentWrapper}>
-                <NewPost
-                    profilePicture={profilePicture}
-                    userNickname={userNickname}
-                    userGroupToSendMessage={currentGroup}
-                    userId={userId}
-                    renewFeed={() => renewFeedHandler(currentGroup, 0)}
-                />
-                <Posts data={posts} />
-                {hasMore && (
-                    <Button
-                        title="Carregar mais"
-                        onPress={handleLoadMore}
-                    />
-                )}
-            </ScrollView>
+            { posts
+                ? <FlatList
+                    contentContainerStyle={contentWrapper}
+                    onEndReached={handleLoadMore}
+                    onEndReachedThreshold={0.3}
+                    data={posts}
+                    renderItem={(post) => <Post data={post.item}/>}
+                    ListHeaderComponent={newPost}
+                /> 
+            : null }
         </View>
     );
 };
