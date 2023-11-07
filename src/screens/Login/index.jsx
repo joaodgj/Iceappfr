@@ -3,10 +3,11 @@ import { View, Image, Text } from "react-native"
 import { useNavigation } from "@react-navigation/native"
 import LoginStyle from "./style"
 import { Button, TextInput } from "../../components"
-import { login } from "../../services";
+import { apiLogin } from "../../services";
 import { AuthContext } from "../../contexts/auth"
 import apiClient from "../../services/api";
 import jwt_decode from "jwt-decode";
+import { useToast } from "react-native-toast-notifications";
 
 const Login = () => {
   const [username, onChangeUsername] = useState('')
@@ -24,13 +25,15 @@ const Login = () => {
     forgotUserName
   } = LoginStyle
 
+  const toast = useToast()
+
   const handleLogin = async () => {
-    login(username, password).then(response => {
-      setAuth({ token: response.data.token, ...jwt_decode(response.data.token) })
-      if (response.status === 200) {
+    apiLogin(username, password).then(response => {
+      if (response && response.status === 200) {
+        setAuth({ token: response.data.token, ...jwt_decode(response.data.token) })
         apiClient.defaults.headers.Authorization = `Baerer ${response.data.token}`;
         navigation.navigate("Feed");
-      }
+      } else toast.show("Não foi possível realizar o login", {type: "danger"});
     });
   };
 

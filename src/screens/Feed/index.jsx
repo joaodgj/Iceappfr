@@ -43,7 +43,7 @@ const Feed = () => {
                 console.error('Erro ao renovar o feed:', err);
             });
         }
-    }, [hasMore]);
+    }, [hasMore, currentGroup, page]);
 
     useEffect(() => {
         renewFeedHandler(currentGroup, page);

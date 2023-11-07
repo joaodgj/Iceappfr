@@ -4,6 +4,7 @@ import { useNavigation } from "@react-navigation/native"
 import PasswordResetStyle from "./style"
 import { Button, TextInput } from "../../components"
 import { passwordReset } from "../../services";
+import { useToast } from "react-native-toast-notifications";
 
 const PasswordReset = () => {
   const [token, onChangetoken] = useState('')
@@ -13,9 +14,11 @@ const PasswordReset = () => {
 
   const { loginWrapper, viewScreen, logoStyle, brandName, title, text } = PasswordResetStyle
 
+  const toast = useToast()
+
   const handlePW = async () => {
     if (newPWConfirmed !== newPW ) {
-      alert("Senhas não batem!")
+      toast.show("As senhas devem ser iguais!", {type: "danger"});
     } else
       passwordReset(token, newPW).then(response => {
         if (response.status === 200) {

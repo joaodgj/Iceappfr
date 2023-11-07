@@ -3,18 +3,23 @@ import { View, Image, TextInput } from "react-native"
 import NewPostStyle from "./style"
 
 import { Button } from "../"
-import { sendNewPost } from "../../services";
+import { sendNewPost } from "../../services"
+import { useToast } from "react-native-toast-notifications";
+
 
 const NewPost = (props) => {
     const { profilePicture, userNickname, userGroupToSendMessage, userId, renewFeed } = props
     const { newPostWrapper, profilePictureStyle, newPostTextInput, newPostButton, createNewPostWrapper, buttonsWrapper } = NewPostStyle
     const [newPostDescription, setNewPostDescription] = useState('');
+
+    const toast = useToast()
     
     const sendPostHandler = async () => {
         if (newPostDescription === '') return
         sendNewPost(userId, userGroupToSendMessage.groupId, newPostDescription).then(response => {
             if (response.status === 201) {
                 setNewPostDescription('')
+                toast.show("Postagem Publicada!", {type: "success"});
                 renewFeed(userGroupToSendMessage, 0)
             }
         })

@@ -1,10 +1,13 @@
 import React from "react";
 import { AuthContextProvider } from "../contexts/auth";
+import ToasterProvider from "./toastProvider";
 
 const Providers = (props) => {
   return (
       <AuthContextProvider>
-        {props.children}
+        <ToasterProvider>
+          {props.children}
+        </ToasterProvider>
       </AuthContextProvider>
   );
 };
