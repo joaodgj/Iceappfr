@@ -43,12 +43,10 @@ const getPostsByGroups = async (groupIds, page) => {
   const skip = page * take; // Calcula o número correto de posts a pular
 
   const response = await apiClient
-    .get(`${API_BASE_URL}/post/posts`, {
-      params: {
-        groupIds,
+    .post(`${API_BASE_URL}/post/array`, {
+        groupIds: [groupIds],
         skip,
         take
-      }
     })
     .catch((err) => {
       console.error("ops! ocorreu um erro: " + err);
