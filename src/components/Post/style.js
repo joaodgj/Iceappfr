@@ -82,6 +82,13 @@ const PostStyle = StyleSheet.create({
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center'
+  },
+  contentWrapper: {
+    marginTop: 20
+  },
+  scrollViewWrapper: {
+    height: 300,
+    width: '100%'
   }
 });
 

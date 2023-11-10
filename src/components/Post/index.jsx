@@ -1,8 +1,9 @@
-import { useState, useEffect } from 'react'
-import { View, Image, Text, Pressable } from "react-native"
+import { useState } from 'react'
+import { View, Image, Text, Pressable, ScrollView, TouchableOpacity } from "react-native"
 import PostStyle from "./style"
 import { timestampToString } from '../../utils'
 import { getCommentsByPost, likePost, unlikePost } from '../../services'
+import { Comment, Modal, NewComment } from '../'
 
 import { colors } from '../../styles'
 
@@ -22,21 +23,23 @@ const Post = (props) => {
         mediaImageStyle,
         commentsWrapper,
         likesWrapper,
-        userNameStyle
+        userNameStyle,
+        scrollViewWrapper
     } = PostStyle
-    const [postComments, setPostComments] = useState('posts')
-    const [showPostComments, setShowPostComments] = useState()
+    const [postComments, setPostComments] = useState([])
+    const [showPostComments, setShowPostComments] = useState(false)
     const [postLiked, setPostLiked] = useState(userHasLiked)
     const [likes, setLikes] = useState(likesCount)
 
-    const commentsHandler = () => {
-        setShowPostComments(!showPostComments)
-
-        getCommentsByPost(id).then(response => {
-            if (response.status === 200) {
-                setPostComments(response.data)
-            }
-        })
+    const commentsHandler = (update) => {
+        if (!showPostComments || update) {
+            getCommentsByPost(id).then(response => {
+                if (response.status === 200) {
+                    setPostComments(response.data)
+                }
+            })
+        }
+        setShowPostComments(!showPostComments || !!update)
     }
 
     const likeUnlikePostHandler = () => {
@@ -54,7 +57,7 @@ const Post = (props) => {
                     setLikes(likes + 1)
                 }
             })
-    }    
+    }
 
     return (
         <View style={postWrapper}>
@@ -72,25 +75,33 @@ const Post = (props) => {
                         media.map((media, index) => <Image style={mediaImageStyle} key={index} source={{ uri: media.url }} />)
                     }
                 </View>
-            : null }
+                : null}
             <View style={indicatorsWrapper}>
                 <Pressable style={commentsWrapper} onPress={commentsHandler} >
                     <Image style={commentIconStyle} source={require("../../assets/icons/comment.png")} />
                     <Text>{commentsCount}</Text>
                 </Pressable>
                 <Pressable style={likesWrapper} onPress={likeUnlikePostHandler} >
-                    { postLiked ? <Image style={likeIconStyle} source={require('../../assets/icons/mainLike.png')} />
-                    : <Image style={likeIconStyle} source={require('../../assets/icons/like.png')} /> }
-                    <Text style={postLiked ? {color: colors.main} : {}}>{likes}</Text>
+                    {postLiked ? <Image style={likeIconStyle} source={require('../../assets/icons/mainLike.png')} />
+                        : <Image style={likeIconStyle} source={require('../../assets/icons/like.png')} />}
+                    <Text style={postLiked ? { color: colors.main } : {}}>{likes}</Text>
                 </Pressable>
             </View>
-            {showPostComments
-                ? <View>
-                    <Text>
-                        {postComments}
-                    </Text>
-                </View> 
-                : null}
+            <Modal closeModal={() => commentsHandler()} visible={showPostComments} title={"Comentários"} >
+                <View style={scrollViewWrapper}>
+                    <ScrollView>
+                        {postComments.length > 0
+                            ? postComments.toReversed().map((post, index) =>
+                                <Comment data={post} key={index} />)
+                            : <Text>{"Essa postagem não tem comentários"}</Text>
+                        }
+                        <NewComment
+                            postToSendComment={id}
+                            renewComments={() => commentsHandler(true)}
+                        />
+                    </ScrollView>
+                </View>
+            </Modal>
         </View>
     )
 };

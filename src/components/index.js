@@ -4,6 +4,8 @@ import Header from "./Header"
 import NewPost from "./NewPost"
 import Post from "./Post"
 import Modal from "./Modal"
+import Comment from "./Comment"
+import NewComment from "./NewComment"
 
 export {
     Button,
@@ -11,5 +13,7 @@ export {
     Header,
     NewPost,
     Post,
-    Modal
+    Modal,
+    Comment,
+    NewComment
 }

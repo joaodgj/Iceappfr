@@ -13,6 +13,18 @@ const apiLogin = async (username, password) => {
     });
 };
 
+const sendNewComment = async (idPost, description) => {
+  const response = await apiClient
+    .post(`${API_BASE_URL}/comment`, {
+      idPost,
+      description
+    })
+    .catch((err) => {
+      console.error("ops! ocorreu um erro: " + err);
+    });
+  return response;
+};
+
 const sendNewPost = async (idUser, idGroup, description) => {
   const response = await apiClient
     .post(`${API_BASE_URL}/post`, {
@@ -46,7 +58,7 @@ const getPostsByGroups = async (groupIds, page) => {
 
 const getCommentsByPost = async (postId) => {
   const response = await apiClient
-  .get(`${API_BASE_URL}/comment`)
+  .get(`${API_BASE_URL}/comment/post`, { postId })
   .catch((err) => {
     console.error("ops! ocorreu um erro: " + err);
   });
@@ -120,4 +132,4 @@ const passwordReset = async (resetToken, newPassword) => {
   return response;
 };
 
-export { apiLogin, sendNewPost, getPostsByGroups, getCommentsByPost, likePost, unlikePost, getLikesCountByPost, forgotPassword, forgotUserName, passwordReset };
+export { apiLogin, sendNewPost, getPostsByGroups, getCommentsByPost, likePost, unlikePost, getLikesCountByPost, forgotPassword, forgotUserName, passwordReset, sendNewComment };

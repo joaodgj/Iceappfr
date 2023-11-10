@@ -6,7 +6,7 @@ import { getPostsByGroups } from '../../services';
 import FeedStyle from './style';
 
 const Feed = () => {
-    const { feedWrapper, logoStyle, profilePictureStyle, contentWrapper } = FeedStyle;
+    const { feedWrapper, logoStyle, profilePictureStyle, contentWrapper, modalViewStyle } = FeedStyle;
     const [profilePicture, setProfilePicture] = useState();
     const [userNickname, setUserNickname] = useState();
     const [userGroups, setUserGroups] = useState();
@@ -54,12 +54,12 @@ const Feed = () => {
     };
 
     const newPost = <NewPost
-    profilePicture={profilePicture}
-    userNickname={userNickname}
-    userGroupToSendMessage={currentGroup}
-    userId={userId}
-    renewFeed={() => renewFeedHandler(currentGroup, 0)}
-/>
+        profilePicture={profilePicture}
+        userNickname={userNickname}
+        userGroupToSendMessage={currentGroup}
+        userId={userId}
+        renewFeed={() => renewFeedHandler(currentGroup, 0)}
+    />
 
     return (
         <View style={feedWrapper}>
@@ -67,16 +67,16 @@ const Feed = () => {
                 <Image style={logoStyle} source={require("../../assets/logo.png")} />
                 <Image style={profilePictureStyle} source={{ uri: profilePicture }} />
             </Header>
-            { posts
+            {posts
                 ? <FlatList
                     contentContainerStyle={contentWrapper}
                     onEndReached={handleLoadMore}
                     onEndReachedThreshold={0.3}
                     data={posts}
-                    renderItem={(post) => <Post data={post.item}/>}
+                    renderItem={(post) => <Post data={post.item} />}
                     ListHeaderComponent={newPost}
-                /> 
-            : null }
+                />
+                : null}
         </View>
     );
 };
