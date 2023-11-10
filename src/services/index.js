@@ -58,7 +58,7 @@ const getPostsByGroups = async (groupIds, page) => {
 
 const getCommentsByPost = async (postId) => {
   const response = await apiClient
-  .get(`${API_BASE_URL}/comment/post`, { postId })
+  .get(`${API_BASE_URL}/comment/post`, { params: { postId } })
   .catch((err) => {
     console.error("ops! ocorreu um erro: " + err);
   });
