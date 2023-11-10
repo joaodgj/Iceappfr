@@ -1,4 +1,5 @@
-import { Modal as ReactModal, View, Pressable, Image, Text } from "react-native"
+import { View, Pressable, Image, Text } from "react-native"
+import ReactModal from 'react-native-modal'
 import ModalStyle from "./style"
 
 const Modal = (props) => {
@@ -9,7 +10,8 @@ const Modal = (props) => {
             <ReactModal
                 animationType="slide"
                 transparent={true}
-                visible={visible}
+                isVisible={visible}
+                onBackdropPress={closeModal}
                 onRequestClose={closeModal}
             >
                 <View style={modalViewStyle}>
