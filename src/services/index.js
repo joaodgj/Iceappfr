@@ -1,6 +1,6 @@
 import apiClient from "./api";
 
-const API_BASE_URL = "http://15.228.248.72:3333";
+const API_BASE_URL = "http://15.229.26.160:3333";
 
 const apiLogin = async (username, password) => {
   return await apiClient
