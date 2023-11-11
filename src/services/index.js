@@ -40,11 +40,11 @@ const sendNewPost = async (idUser, idGroup, description) => {
 
 const getPostsByGroups = async (groupIds, page) => {
   const take = 10;
-  const skip = page * take; // Calcula o número correto de posts a pular
+  const skip = page * take;
 
   const response = await apiClient
     .post(`${API_BASE_URL}/post/array`, {
-        groupIds: [groupIds],
+        groupIds: groupIds,
         skip,
         take
     })

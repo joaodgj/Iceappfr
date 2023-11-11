@@ -1,35 +1,36 @@
 import React, { useEffect, useState, useContext, useCallback } from 'react';
-import { View, Image, FlatList } from 'react-native';
+import { View, Image, FlatList, Text } from 'react-native';
+import DropDownPicker from 'react-native-dropdown-picker';
 import { AuthContext } from "../../contexts/auth";
 import { Header, NewPost, Post } from '../../components';
 import { getPostsByGroups } from '../../services';
 import FeedStyle from './style';
 
 const Feed = () => {
-    const { feedWrapper, logoStyle, profilePictureStyle, contentWrapper, modalViewStyle } = FeedStyle;
+    const { feedWrapper, logoStyle, profilePictureStyle, contentWrapper, filtersWrapperStyle, dropDownContainerStyle, groupDropDownLabeStyle } = FeedStyle;
     const [profilePicture, setProfilePicture] = useState();
     const [userNickname, setUserNickname] = useState();
-    const [userGroups, setUserGroups] = useState();
     const [currentGroup, setCurrentGroup] = useState();
     const [userId, setUserId] = useState();
     const [posts, setPosts] = useState();
     const [page, setPage] = useState(0);
     const [hasMore, setHasMore] = useState(true);
+    const [groupDropDownOpen, setGroupDropDownOpen] = useState(false);
+    const [groupDropDownItems, setGroupDropDownItems] = useState([]);
 
     const { auth } = useContext(AuthContext);
 
     useEffect(() => {
-        setProfilePicture(auth.profile_image_url);
-        setUserNickname(auth.nickname);
-        setUserGroups(auth.arrayGroups);
-        setCurrentGroup(auth.arrayGroups[0]);
-        setUserId(auth.userId);
-        renewFeedHandler(auth.arrayGroups[0], 0);
+        setProfilePicture(auth.profile_image_url)
+        setUserNickname(auth.nickname)
+        setGroupDropDownItems(auth.arrayGroups.map(group => { return { label: group.nameGroup, value: group.groupId }}))
+        setCurrentGroup(auth.arrayGroups[0].groupId)
+        setUserId(auth.userId)
     }, [auth]);
 
     const renewFeedHandler = useCallback((currentGroup, page) => {
-        if (currentGroup && hasMore) {
-            getPostsByGroups(currentGroup.groupId, page).then(response => {
+        if (currentGroup && (hasMore || page === 0)) {
+            getPostsByGroups([currentGroup], page).then(response => {
                 if (response.status === 200) {
                     const newPosts = response.data.posts;
                     if (page === 0) {
@@ -44,6 +45,7 @@ const Feed = () => {
             });
         }
     }, [hasMore, currentGroup, page]);
+    
 
     useEffect(() => {
         renewFeedHandler(currentGroup, page);
@@ -67,6 +69,19 @@ const Feed = () => {
                 <Image style={logoStyle} source={require("../../assets/logo.png")} />
                 <Image style={profilePictureStyle} source={{ uri: profilePicture }} />
             </Header>
+            <View style={filtersWrapperStyle}>
+                <Text style={groupDropDownLabeStyle} >{"Selecione um grupo para ver as postagens: "}</Text>
+            <DropDownPicker
+                dropDownContainerStyle={dropDownContainerStyle}
+                open={groupDropDownOpen}
+                value={currentGroup}
+                items={groupDropDownItems}
+                setOpen={setGroupDropDownOpen}
+                setValue={setCurrentGroup}
+                setItems={setGroupDropDownItems}
+                placeholder="Selecione um grupo"
+            />
+            </View>
             {posts
                 ? <FlatList
                     contentContainerStyle={contentWrapper}

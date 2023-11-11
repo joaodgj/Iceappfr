@@ -14,8 +14,20 @@ const FeedStyle = StyleSheet.create({
     borderRadius: 10,
   },
   contentWrapper: {
-    marginTop: 100,
     paddingHorizontal: 30
+  },
+  filtersWrapperStyle: {
+    marginTop: 110,
+    display: 'flex',
+    paddingHorizontal: 30,
+    maxWidth: 400
+  },
+  dropDownContainerStyle: {
+    position: 'static'
+  },
+  groupDropDownLabeStyle: {
+    paddingLeft: 5,
+    paddingBottom: 5
   }
 });
 
