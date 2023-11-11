@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext, useCallback } from 'react';
-import { View, Image, FlatList } from 'react-native';
+import { View, Image, FlatList, Text } from 'react-native';
 import DropDownPicker from 'react-native-dropdown-picker';
 import { AuthContext } from "../../contexts/auth";
 import { Header, NewPost, Post } from '../../components';
@@ -7,7 +7,7 @@ import { getPostsByGroups } from '../../services';
 import FeedStyle from './style';
 
 const Feed = () => {
-    const { feedWrapper, logoStyle, profilePictureStyle, contentWrapper, filtersWrapperStyle, dropDownContainerStyle } = FeedStyle;
+    const { feedWrapper, logoStyle, profilePictureStyle, contentWrapper, filtersWrapperStyle, dropDownContainerStyle, groupDropDownLabeStyle } = FeedStyle;
     const [profilePicture, setProfilePicture] = useState();
     const [userNickname, setUserNickname] = useState();
     const [currentGroup, setCurrentGroup] = useState();
@@ -70,13 +70,14 @@ const Feed = () => {
                 <Image style={profilePictureStyle} source={{ uri: profilePicture }} />
             </Header>
             <View style={filtersWrapperStyle}>
+                <Text style={groupDropDownLabeStyle} >{"Selecione um grupo para ver as postagens: "}</Text>
             <DropDownPicker
                 dropDownContainerStyle={dropDownContainerStyle}
                 open={groupDropDownOpen}
                 value={currentGroup}
                 items={groupDropDownItems}
                 setOpen={setGroupDropDownOpen}
-                setValue={changeCurrentGroupHandler}
+                setValue={setCurrentGroup}
                 setItems={setGroupDropDownItems}
                 placeholder="Selecione um grupo"
             />
