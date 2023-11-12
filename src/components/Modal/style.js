@@ -14,10 +14,9 @@ const ButtonStyle = StyleSheet.create({
     height: 15
   },
   modalViewStyle: {
-    margin: 20,
     backgroundColor: "white",
     borderRadius: 20,
-    padding: 35,
+    padding: 10,
     alignItems: "center",
     shadowColor: "#000",
     shadowOffset: {

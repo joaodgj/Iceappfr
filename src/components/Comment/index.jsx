@@ -17,7 +17,7 @@ const Comment = (props) => {
     return (
         <View style={commentWrapper}>
             <View style={headerCommentWrapper}>
-                <Image style={profilePictureStyle} source={{ uri: usercomment.profileImageUrl }} />
+                <Image style={profilePictureStyle} source={{ uri: usercomment.profile_image_url }} />
                 <View style={userDataStyle}>
                     <Text style={userNameStyle}>{usercomment.name}</Text>
                     <Text style={datetimeStyle}>{timestampToString(timestamp)}</Text>
