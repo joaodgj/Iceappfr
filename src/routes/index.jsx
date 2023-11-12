@@ -7,6 +7,7 @@ import Feed from '../screens/Feed';
 import ForgotPassword from '../screens/ForgotPassword';
 import ForgotUserName from '../screens/ForgotUserName';
 import PasswordReset from '../screens/PasswordReset';
+import UserProfile from '../screens/UserProfile';
 
 const Stack = createNativeStackNavigator();
 
@@ -26,6 +27,8 @@ const Route = () => {
         <Stack.Screen name="ForgotPassword" component={ForgotPassword}  options={{title: 'ForgotPassword'}} />
 
         <Stack.Screen name="PasswordReset" component={PasswordReset}  options={{title: 'PasswordReset'}} />
+
+        <Stack.Screen name="UserProfile" component={UserProfile} options={{title: 'UserProfile'}} />
 
       </Stack.Navigator>
     </NavigationContainer>

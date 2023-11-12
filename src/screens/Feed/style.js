@@ -6,12 +6,13 @@ const FeedStyle = StyleSheet.create({
   },
   logoStyle: {
     width: 59,
-    height: 47,
+    height: 47
   },
   profilePictureStyle: {
     width: 50,
     height: 50,
     borderRadius: 10,
+    cursor: 'pointer'
   },
   contentWrapper: {
     paddingHorizontal: 30

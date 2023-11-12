@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useContext, useCallback } from 'react';
-import { View, Image, FlatList, Text } from 'react-native';
+import { View, Image, FlatList, Text, Pressable } from 'react-native';
+import { useNavigation } from "@react-navigation/native"
 import DropDownPicker from 'react-native-dropdown-picker';
 import { AuthContext } from "../../contexts/auth";
 import { Header, NewPost, Post } from '../../components';
@@ -19,6 +20,8 @@ const Feed = () => {
     const [groupDropDownItems, setGroupDropDownItems] = useState([]);
 
     const { auth } = useContext(AuthContext);
+
+    const navigation = useNavigation();
 
     useEffect(() => {
         setProfilePicture(auth.profile_image_url)
@@ -63,11 +66,19 @@ const Feed = () => {
         renewFeed={() => renewFeedHandler(currentGroup, 0)}
     />
 
+    const enterProfileHandler = (id) => {
+        navigation.navigate("UserProfile", {
+            userId: id,
+          });
+    };
+
     return (
         <View style={feedWrapper}>
             <Header>
                 <Image style={logoStyle} source={require("../../assets/logo.png")} />
-                <Image style={profilePictureStyle} source={{ uri: profilePicture }} />
+                <Pressable onPress={() => enterProfileHandler(userId)}>
+                    <Image style={profilePictureStyle} source={{ uri: profilePicture }} />
+                </Pressable>
             </Header>
             <View style={filtersWrapperStyle}>
                 <Text style={groupDropDownLabeStyle} >{"Selecione um grupo para ver as postagens: "}</Text>

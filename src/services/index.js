@@ -130,4 +130,42 @@ const passwordReset = async (resetToken, newPassword) => {
   return response;
 };
 
-export { apiLogin, sendNewPost, getPostsByGroups, getCommentsByPost, likePost, unlikePost, getLikesCountByPost, forgotPassword, forgotUserName, passwordReset, sendNewComment };
+const getMyPosts = async (page) => {
+  const take = 10;
+  const skip = page * take;
+
+  const response = await apiClient
+    .get(`${API_BASE_URL}/post/profile`, { params: { skip, take } })
+    .catch((err) => {
+      console.error("ops! ocorreu um erro: " + err);
+    });
+  return response;
+};
+
+const getPostsByUser = async (friendId, page) => {
+  const take = 10;
+  const skip = page * take;
+
+  const response = await apiClient
+    .get(`${API_BASE_URL}/post/friendprofile`, { params: { friendId, skip, take } })
+    .catch((err) => {
+      console.error("ops! ocorreu um erro: " + err);
+    });
+  return response;
+};
+
+export {
+  apiLogin,
+  sendNewPost,
+  getPostsByGroups,
+  getCommentsByPost,
+  likePost,
+  unlikePost,
+  getLikesCountByPost,
+  forgotPassword,
+  forgotUserName,
+  passwordReset,
+  sendNewComment,
+  getPostsByUser,
+  getMyPosts
+};

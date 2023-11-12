@@ -1,5 +1,6 @@
 import { useState } from 'react'
-import { View, Image, Text, Pressable, ScrollView, TouchableOpacity } from "react-native"
+import { View, Image, Text, Pressable, ScrollView } from "react-native"
+import { useNavigation } from "@react-navigation/native"
 import PostStyle from "./style"
 import { timestampToString } from '../../utils'
 import { getCommentsByPost, likePost, unlikePost } from '../../services'
@@ -31,6 +32,8 @@ const Post = (props) => {
     const [postLiked, setPostLiked] = useState(userHasLiked)
     const [likes, setLikes] = useState(likesCount)
 
+    const navigation = useNavigation();
+
     const commentsHandler = (update) => {
         if (!showPostComments || update) {
             getCommentsByPost(id).then(response => {
@@ -59,10 +62,18 @@ const Post = (props) => {
             })
     }
 
+    const enterProfileHandler = (id) => {
+        navigation.navigate("UserProfile", {
+            userId: id,
+          });
+    };
+
     return (
         <View style={postWrapper}>
             <View style={headerPostWrapper}>
-                <Image style={profilePictureStyle} source={{ uri: user.profileImageUrl }} />
+                <Pressable onPress={() => enterProfileHandler(user.id)}>
+                    <Image style={profilePictureStyle} source={{ uri: user.profileImageUrl }} />
+                </Pressable>
                 <View style={userDataStyle}>
                     <Text style={userNameStyle}>{user.name}</Text>
                     <Text style={datetimeStyle}>{timestampToString(createdAt)}</Text>

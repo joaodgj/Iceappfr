@@ -16,7 +16,7 @@ const NewPost = (props) => {
     
     const sendPostHandler = async () => {
         if (newPostDescription === '') return
-        sendNewPost(userId, userGroupToSendMessage.groupId, newPostDescription).then(response => {
+        sendNewPost(userId, userGroupToSendMessage, newPostDescription).then(response => {
             if (response.status === 201) {
                 setNewPostDescription('')
                 toast.show("Postagem Publicada!", {type: "success"});
