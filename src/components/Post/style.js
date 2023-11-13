@@ -65,13 +65,16 @@ const PostStyle = StyleSheet.create({
     marginBottom: 10
   },
   postMediaStyle: {
+    display: 'flex',
+    flexDirection: 'row',
     overflow: 'auto',
     height: 150,
     width: 'inherit'
   },
   mediaImageStyle: {
     resizeMode: 'contain',
-    height: '100%'
+    height: '100%',
+    width: '100%'
   },
   commentsWrapper: {
     display: 'flex',
