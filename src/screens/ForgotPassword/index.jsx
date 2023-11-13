@@ -4,16 +4,20 @@ import { useNavigation } from "@react-navigation/native"
 import ForgotPasswordStyle from "./style"
 import { Button, TextInput } from "../../components"
 import { forgotPassword } from "../../services"
+import { useToast } from "react-native-toast-notifications"
 
 const ForgotPassword = () => {
   const [userName, onChangeuserName] = useState('')
   const navigation = useNavigation();
+
+  const toast = useToast()
 
   const { loginWrapper, viewScreen, viewButton, logoStyle, brandName, title, text } = ForgotPasswordStyle
 
   const handlePW = async () => {
     forgotPassword(userName).then(response => {
       if (response.status === 200) {
+        toast.show("Email com token enviado!", {type: "success"});
         navigation.navigate("PasswordReset");
       }
     });

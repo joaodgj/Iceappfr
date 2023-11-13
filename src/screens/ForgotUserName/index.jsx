@@ -4,16 +4,20 @@ import { useNavigation } from "@react-navigation/native"
 import ForgotUserNameStyle from "./style"
 import { Button, TextInput } from "../../components"
 import { forgotUserName } from "../../services"
+import { useToast } from "react-native-toast-notifications"
 
 const ForgotUserName = () => {
   const [email, onChangeEmail] = useState('')
   const navigation = useNavigation();
+
+  const toast = useToast()
 
   const { loginWrapper, viewScreen, viewButton, logoStyle, brandName, title, text } = ForgotUserNameStyle
 
   const handleSendButton = async () => {
     forgotUserName(email).then(response => {
       if (response.status === 200) {
+        toast.show("Email com usuários enviado!", {type: "success"});
         navigation.navigate("Login");
       }
     });
