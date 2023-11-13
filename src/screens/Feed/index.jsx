@@ -32,12 +32,7 @@ const Feed = () => {
     }, [auth]);
 
     const renewFeedHandler = useCallback((currentGroup, page, force) => {
-        console.log("veio!!!")
-        console.log("CurrentGroup: " + currentGroup)
-        console.log("page: " + page)
-        console.log("hasMore: " + hasMore)
         if ((currentGroup && (hasMore || page === 0)) || force) {
-            console.log("CHEGOU DENTRO DO IF")
             getPostsByGroups([currentGroup], force ? 0 : page).then(response => {
                 if (response.status === 200) {
                     const newPosts = response.data.posts;

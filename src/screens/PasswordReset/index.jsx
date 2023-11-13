@@ -43,11 +43,13 @@ const PasswordReset = () => {
           onChangeText={onChangenewPW}
           value={newPW}
           placeholder="Nova senha"
+          secureTextEntry={true}
         />
         <TextInput
           onChangeText={onChangenewPWConfirmed}
           value={newPWConfirmed}
           placeholder="Confirme a nova senha"
+          secureTextEntry={true}
         />
         <Button
         title="Redefinir"

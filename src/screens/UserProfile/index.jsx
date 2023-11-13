@@ -18,7 +18,6 @@ const UserProfile = ({route, navigation}) => {
 
     useEffect(() => {
         if (auth.userId === userId) setUserData(auth)
-        console.log(auth)
     }, [auth, route]);
 
     const renewUserProfileHandler = useCallback((page) => {
