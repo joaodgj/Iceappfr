@@ -31,28 +31,36 @@ const Feed = () => {
         setUserId(auth.userId)
     }, [auth]);
 
-    const renewFeedHandler = useCallback((currentGroup, page) => {
-        if (currentGroup && (hasMore || page === 0)) {
-            getPostsByGroups([currentGroup], page).then(response => {
+    const renewFeedHandler = useCallback((currentGroup, page, force) => {
+        console.log("veio!!!")
+        console.log("CurrentGroup: " + currentGroup)
+        console.log("page: " + page)
+        console.log("hasMore: " + hasMore)
+        if ((currentGroup && (hasMore || page === 0)) || force) {
+            console.log("CHEGOU DENTRO DO IF")
+            getPostsByGroups([currentGroup], force ? 0 : page).then(response => {
                 if (response.status === 200) {
                     const newPosts = response.data.posts;
-                    if (page === 0) {
+                    if (page === 0 || force) {
                         setPosts(newPosts);
                     } else {
                         setPosts(prevPosts => [...prevPosts, ...newPosts]);
                     }
                     setHasMore(newPosts.length === 10);
                 }
-            }).catch(err => {
-                console.error('Erro ao renovar o feed:', err);
-            });
+            })
         }
     }, [hasMore, currentGroup, page]);
     
 
     useEffect(() => {
-        renewFeedHandler(currentGroup, page);
-    }, [page, currentGroup, renewFeedHandler]);
+        renewFeedHandler(currentGroup, page, false);
+    }, [page, renewFeedHandler]);
+
+    useEffect(() => {
+        renewFeedHandler(currentGroup, page, true);
+    }, [currentGroup])
+    
 
     const handleLoadMore = () => {
         if (hasMore) setPage(prevPage => prevPage + 1);
@@ -63,7 +71,7 @@ const Feed = () => {
         userNickname={userNickname}
         userGroupToSendMessage={currentGroup}
         userId={userId}
-        renewFeed={() => renewFeedHandler(currentGroup, 0)}
+        renewFeed={() => renewFeedHandler(currentGroup, 0, true)}
     />
 
     const enterProfileHandler = (id) => {
